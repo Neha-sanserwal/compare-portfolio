@@ -53,7 +53,16 @@ const isRegisteredUser = (req, res) => {
   });
 };
 
+const registerUser = (req, res) => {
+  const { dbClient } = req.app.locals;
+  const { username, userDetails } = req.body;
+  dbClient.hset("users", username, JSON.stringify(userDetails), () => {
+    res.json(true);
+  });
+};
+
 module.exports = {
   authenticateUser,
   isRegisteredUser,
+  registerUser,
 };

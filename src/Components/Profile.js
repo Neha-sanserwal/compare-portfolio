@@ -1,18 +1,35 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, withRouter } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
-const Profile = () => {
+
+const Profile = (props) => {
   let location = useLocation();
   const [user, setUser] = useState(null);
   useEffect(() => {
     const [, code] = location.search.split("=");
     Api.authenticateUser(code).then((userDetails) => {
       Api.isRegisteredUser(userDetails.login).then((details) => {
-        Api.setCurrentUser(details).then(() => setUser(details));
+        const parsedDetails = JSON.parse(details) || {};
+        if (!parsedDetails.login) {
+          props.history.push({
+            pathname: "/signup",
+            state: { userDetails },
+          });
+        } else {
+          setUser(parsedDetails);
+        }
       });
     });
-  }, [location]);
-  return <div>{user.login ? <div></div> : <div></div>}</div>;
+  }, []);
+  return (
+    <div>
+      {user && user.login && (
+        <div>
+          <h1>hello, {user.name}</h1>
+        </div>
+      )}
+    </div>
+  );
 };
 
-export default Profile;
+export default withRouter(Profile);

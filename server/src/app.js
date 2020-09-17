@@ -10,4 +10,6 @@ app.get("/api/getUser/:code", handlers.authenticateUser);
 
 app.get("/api/isRegisteredUser/:username", handlers.isRegisteredUser);
 
+app.post("/api/registerUser", handlers.registerUser);
+
 module.exports = { app };
