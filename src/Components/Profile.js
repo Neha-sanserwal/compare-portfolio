@@ -7,12 +7,12 @@ const Profile = () => {
   useEffect(() => {
     const [, code] = location.search.split("=");
     Api.authenticateUser(code).then((userDetails) => {
-      if (Api.isRegisteredUser(userDetails.username)) {
-        Api.setCurrentUser(userDetails).then(() => setUser(userDetails));
-      }
+      Api.isRegisteredUser(userDetails.login).then((details) => {
+        Api.setCurrentUser(details).then(() => setUser(details));
+      });
     });
   }, [location]);
-  return <h1>{JSON.stringify(user)}</h1>;
+  return <div>{user.login ? <div></div> : <div></div>}</div>;
 };
 
 export default Profile;

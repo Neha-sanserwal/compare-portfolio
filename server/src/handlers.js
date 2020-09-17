@@ -1,7 +1,7 @@
 const request = require("request");
 const { getClientID, getClientSecret } = require("../../config");
 
-const getUser = (accessToken) => {
+const getGithubUser = (accessToken) => {
   return new Promise((resolve, reject) => {
     request.get(
       {
@@ -20,9 +20,9 @@ const getUser = (accessToken) => {
     );
   });
 };
+
 const authenticateUser = (req, res) => {
   const { code } = req.params;
-  console.log(code);
   request.post(
     {
       url: "https://github.com/login/oauth/access_token",
@@ -39,11 +39,21 @@ const authenticateUser = (req, res) => {
     (error, response, body) => {
       const parsedBody = JSON.parse(body);
       const accessToken = parsedBody["access_token"];
-      getUser(accessToken).then((result) => res.json(JSON.parse(result)));
+      getGithubUser(accessToken).then((result) => res.json(JSON.parse(result)));
     }
   );
 };
 
+const isRegisteredUser = (req, res) => {
+  const { dbClient } = req.app.locals;
+  const { username } = req.params;
+  dbClient.hget("users", username, (err, userDetails) => {
+    err && res.json(err);
+    res.json(userDetails);
+  });
+};
+
 module.exports = {
   authenticateUser,
+  isRegisteredUser,
 };
