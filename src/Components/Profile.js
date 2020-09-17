@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
 const Profile = () => {
   let location = useLocation();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   useEffect(() => {
     const [, code] = location.search.split("=");
     Api.authenticateUser(code).then((userDetails) => {
@@ -11,7 +11,7 @@ const Profile = () => {
         Api.setCurrentUser(userDetails).then(() => setUser(userDetails));
       }
     });
-  }, [location.search]);
+  }, [location]);
   return <h1>{JSON.stringify(user)}</h1>;
 };
 
