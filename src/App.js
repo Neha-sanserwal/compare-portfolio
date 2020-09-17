@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import Profile from "./Components/Profile";
+import LandingPage from "./Components/LandingPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         </a>
         <Switch>
           <Route exact path="/">
-            <h1>Welcome to Portfolio.</h1>
+            <LandingPage />
           </Route>
           <Route exact path="/about">
             <h1>About us</h1>
