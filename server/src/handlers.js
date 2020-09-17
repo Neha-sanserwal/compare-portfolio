@@ -1,4 +1,5 @@
 const request = require("request");
+const { getClientID, getClientSecret } = require("../../config");
 
 const getUser = (accessToken) => {
   return new Promise((resolve, reject) => {
@@ -30,8 +31,8 @@ const authenticateUser = (req, res) => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        client_id: "8d16ade6f6a225d3f8ea",
-        client_secret: "1830ae80cd5f39a1b09d1d88e81acd4bba3846bf",
+        client_id: getClientID(),
+        client_secret: getClientSecret(),
         code: code,
       }),
     },

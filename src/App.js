@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Link, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Profile from "./Components/Profile";
 import LandingPage from "./Components/LandingPage";
 
@@ -9,7 +9,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <nav>
-          <a href="https://github.com/login/oauth/authorize?client_id=8d16ade6f6a225d3f8ea">
+          <a
+            href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`}
+          >
             Login
           </a>
         </nav>
