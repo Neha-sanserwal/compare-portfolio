@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
-import CurrentUser from "./Components/CurrentUser";
+import Profile from "./Components/Profile";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <h1>About us</h1>
           </Route>
           <Route exact path="/authorize">
-            <CurrentUser />
+            <Profile />
           </Route>
           <Route path="/*">
             <h1>Not found</h1>

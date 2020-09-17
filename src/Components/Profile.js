@@ -1,14 +1,18 @@
 import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
-const CurrentUser = () => {
+const Profile = () => {
   let location = useLocation();
   const [user, setUser] = useState();
   useEffect(() => {
     const [, code] = location.search.split("=");
-    Api.getUser(code).then(setUser);
+    Api.authenticateUser(code).then((userDetails) => {
+      if (Api.isRegisteredUser(userDetails.username)) {
+        Api.setCurrentUser(userDetails).then(() => setUser(userDetails));
+      }
+    });
   }, [location.search]);
-  return <h1>Login page</h1>;
+  return <h1>{JSON.stringify(user)}</h1>;
 };
 
-export default CurrentUser;
+export default Profile;
