@@ -1,22 +1,15 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, NavLink } from "react-router-dom";
 import Login from "./Components/Login";
 import LandingPage from "./Components/LandingPage";
+import Navbar from "./Components/Navbar";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <nav>
-          <a
-            href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`}
-          >
-            Login
-          </a>
-          <Link to="/signup">Signup</Link>
-        </nav>
-
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <LandingPage />

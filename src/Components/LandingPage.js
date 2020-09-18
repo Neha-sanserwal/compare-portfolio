@@ -3,10 +3,7 @@ import * as Api from "./Api";
 export default function (args) {
   const [user, setUser] = useState({});
   useEffect(() => {
-    Api.getCurrentUser().then((a) => {
-      console.log(a);
-      setUser(a);
-    });
+    Api.getCurrentUser().then(setUser);
   }, []);
   return (
     <div className="page">
