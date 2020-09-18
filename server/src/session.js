@@ -5,6 +5,7 @@ class Sessions {
   }
 
   generateSessionId() {
+    this.sessionId++;
     return this.sessionId;
   }
 

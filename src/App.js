@@ -3,7 +3,6 @@ import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Login from "./Components/Login";
 import LandingPage from "./Components/LandingPage";
-import Signup from "./Components/Signup";
 
 function App() {
   return (
@@ -28,9 +27,6 @@ function App() {
           {/* <Route exact path="/profile">
             <Profile />
           </Route> */}
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
           <Route path="/*">
             <h1>Not found</h1>
           </Route>

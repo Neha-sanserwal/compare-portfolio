@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, withRouter } from "react-router-dom";
 import Input from "./Input";
 import * as Api from "./Api";
 
-export default function (props) {
+const SignUp = function (props) {
   const location = useLocation();
-  const [userDetails, setUserDetails] = useState(location.state.userDetails);
+  const state = location.state || {};
+  const [userDetails, setUserDetails] = useState(() => state.userDetails || {});
 
   const handleValue = (key, value) => {
     setUserDetails((prevDetails) =>
@@ -13,14 +14,25 @@ export default function (props) {
     );
   };
   const SaveDetails = () => {
-    Api.registerUser(userDetails.login, userDetails);
+    Api.registerUser(userDetails.login, userDetails).then(() => {
+      Api.loginUser(userDetails.login).then(() => {
+        props.history.push("/profile");
+      });
+    });
   };
   return (
     <div>
+      {console.log(userDetails)}
       <h3>{userDetails.login}</h3>
+      <Input initialValue={userDetails.name} handleValue={handleValue} />
+      <br />
       <Input initialValue={userDetails.email} handleValue={handleValue} />
+      <br />
       <Input initialValue={userDetails.company} handleValue={handleValue} />
+      <br />
       <button onClick={SaveDetails}>Confirm</button>
     </div>
   );
-}
+};
+
+export default withRouter(SignUp);

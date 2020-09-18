@@ -28,15 +28,7 @@ const Login = (props) => {
         });
     });
   });
-  return (
-    <div>
-      {user && user.login && (
-        <div>
-          <h1>hello, {user.name}</h1>
-        </div>
-      )}
-    </div>
-  );
+  return <div>Loading...</div>;
 };
 
 export default withRouter(Login);
