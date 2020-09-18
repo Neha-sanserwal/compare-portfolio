@@ -61,8 +61,11 @@ export const registerUser = (username, userDetails) => {
   });
 };
 
-export const setCurrentUser = () => {
+export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
-    resolve(true);
+    fetchGetRequest("/api/currentUser")
+      .then((res) => res.json())
+      .then(resolve)
+      .catch(reject);
   });
 };

@@ -18,4 +18,6 @@ app.post("/api/registerUser", handlers.registerUser);
 
 app.post("/api/login", handlers.loginUser);
 
+app.get("/api/currentUser", handlers.getCurrentUser);
+
 module.exports = { app };

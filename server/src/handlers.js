@@ -68,9 +68,21 @@ const registerUser = (req, res) => {
   });
 };
 
+const getCurrentUser = (req, res) => {
+  const { dbClient, sessions } = req.app.locals;
+  const { sessionId } = req.cookies;
+  const username = sessions.getSession(sessionId);
+  dbClient.hget("users", username, (err, data) => {
+    const details = data || "{}";
+    err && res.json(err);
+    res.json(JSON.parse(details));
+  });
+};
+
 module.exports = {
   authenticateUser,
   isRegisteredUser,
   registerUser,
   loginUser,
+  getCurrentUser,
 };
