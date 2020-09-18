@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import Profile from "./Components/Profile";
+import Login from "./Components/Login";
 import LandingPage from "./Components/LandingPage";
 import Signup from "./Components/Signup";
 
@@ -23,8 +23,11 @@ function App() {
             <LandingPage />
           </Route>
           <Route exact path="/authorize">
-            <Profile />
+            <Login />
           </Route>
+          {/* <Route exact path="/profile">
+            <Profile />
+          </Route> */}
           <Route exact path="/signup">
             <Signup />
           </Route>

@@ -38,7 +38,16 @@ export const isRegisteredUser = (username) => {
   return new Promise((resolve, reject) => {
     fetchGetRequest(`/api/isRegisteredUser/${username}`)
       .then((res) => res.json())
-      .then(resolve)
+      .then((res) => resolve(res))
+      .catch(reject);
+  });
+};
+
+export const loginUser = (username) => {
+  return new Promise((resolve, reject) => {
+    fetchPostRequest("/api/login", { username })
+      .then((res) => res.json())
+      .then((res) => resolve(res))
       .catch(reject);
   });
 };

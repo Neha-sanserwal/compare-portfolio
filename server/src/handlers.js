@@ -44,6 +44,13 @@ const authenticateUser = (req, res) => {
   );
 };
 
+const loginUser = (req, res) => {
+  const { dbClient, sessions } = req.app.locals;
+  const { username } = req.body;
+  res.cookie("sessionId", sessions.createSession(username));
+  res.json(true);
+};
+
 const isRegisteredUser = (req, res) => {
   const { dbClient } = req.app.locals;
   const { username } = req.params;
@@ -65,4 +72,5 @@ module.exports = {
   authenticateUser,
   isRegisteredUser,
   registerUser,
+  loginUser,
 };

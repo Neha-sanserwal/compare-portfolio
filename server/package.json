@@ -16,6 +16,7 @@
     "request": "^2.88.2"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "redis": "^3.0.2"
   }
 }
