@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
 import useDebounce from "./hooks/useDebounce";
+import "./assets/css/landing.css";
+import List from "./searchSuggestion";
+import Cards from "./Cards";
+
 export default function (args) {
   const [user, setUser] = useState({});
   const [repoList, setRepoList] = useState([]);
@@ -36,39 +40,22 @@ export default function (args) {
     setSearchTerm("");
   };
 
-  const List = repoList.map((repo, index) => {
-    return (
-      <div
-        key={repo.id}
-        onClick={() => {
-          pushToCards(repo.id);
-        }}
-      >
-        {repo.full_name}
-      </div>
-    );
-  });
-  let Cards = cards.map((info) => (
-    <div key={info.id}>
-      <h3>{info.full_name}</h3>
-      <img src={info.owner.avatar_url} />
-      language: <div className="item">{info.language}</div>
-      forks: <div className="item">{info.forks}</div>
-      issues: <div className="item">{info.open_issues_count}</div>
-    </div>
-  ));
   return (
     <div className="page">
-      <div className="banner">
-        <h1>Hello, {(user && user.login) || ""} Welcome to Compare.</h1>
-      </div>
-      <div className="search_area">
+      <div className="banner"></div>
+      <div className="search-area">
         <input
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        {List}
-        {Cards}
+
+        <List list={repoList} handleClick={pushToCards} />
+
+        {Cards && (
+          <div className="compare-cards">
+            <Cards cards={cards} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,59 @@
+.page {
+	display: flex;
+	flex-flow: column;
+	width: 80%;
+	margin-top: 5rem;
+	margin: 0 auto;
+}
+
+.banner {
+	height: 5rem;
+}
+
+.search-area input {
+	border: 1px solid lightgray;
+	height: 3rem;
+	font-size: 1.2rem;
+	border-radius: 5px;
+	width: 50%;
+	margin: 5rem 0 0 0;
+}
+
+.suggestion-box {
+	width: 50%;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin: 0 auto;
+	display: flex;
+	height: 36rem;
+	overflow: auto;
+	flex-flow: column;
+	border: 1px solid lightgray;
+}
+
+.suggestion-item {
+	display: flex;
+	padding: 1rem;
+	box-sizing: border-box;
+	align-content: center;
+	text-align: justify;
+	min-height: 6rem;
+	margin: 0 auto;
+	justify-content: space-between;
+	border-bottom: 0.2px solid lightgrey;
+	width: 100%;
+}
+
+.suggestion-item .item-name {
+	flex-wrap: wrap;
+	width: 60%;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	font-size: 1.5rem;
+
+}
+
+.suggestion-item .item-img img {
+	height: 50px;
+}
