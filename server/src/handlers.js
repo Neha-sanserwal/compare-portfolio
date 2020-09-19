@@ -20,51 +20,62 @@ const getGithubUser = (accessToken) => {
     );
   });
 };
-
-const authenticateUser = (req, res) => {
-  const { code } = req.params;
-  request.post(
-    {
-      url: "https://github.com/login/oauth/access_token",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+const getAccessToken = (code) => {
+  return new Promise((resolve, reject) => {
+    request.post(
+      {
+        url: "https://github.com/login/oauth/access_token",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          client_id: getClientID(),
+          client_secret: getClientSecret(),
+          code: code,
+        }),
       },
-      body: JSON.stringify({
-        client_id: getClientID(),
-        client_secret: getClientSecret(),
-        code: code,
-      }),
-    },
-    (error, response, body) => {
-      const parsedBody = JSON.parse(body);
-      const accessToken = parsedBody["access_token"];
-      getGithubUser(accessToken).then((result) => res.json(JSON.parse(result)));
-    }
-  );
-};
-
-const loginUser = (req, res) => {
-  const { dbClient, sessions } = req.app.locals;
-  const { username } = req.body;
-  res.cookie("sessionId", sessions.createSession(username));
-  res.json(true);
-};
-
-const isRegisteredUser = (req, res) => {
-  const { dbClient } = req.app.locals;
-  const { username } = req.params;
-  dbClient.hget("users", username, (err, userDetails) => {
-    err && res.json(err);
-    res.json(userDetails);
+      (error, response, body) => {
+        error && reject(error);
+        const parsedBody = JSON.parse(body);
+        const accessToken = parsedBody["access_token"];
+        resolve(accessToken);
+      }
+    );
   });
 };
 
-const registerUser = (req, res) => {
+const authenticateUser = (req, res) => {
+  const { code } = req.query;
   const { dbClient } = req.app.locals;
-  const { username, userDetails } = req.body;
-  dbClient.hset("users", username, JSON.stringify(userDetails), () => {
-    res.json(true);
+  getAccessToken(code).then((accessToken) => {
+    getGithubUser(accessToken)
+      .then((githubDetails) => JSON.parse(githubDetails))
+      .then((githubDetails) => {
+        saveUserDetail(userDetails).then(() => {
+          res.cookie("sessionId", sessions.createSession(githubDetails.login));
+          res.redirect("http://localhost:3000/");
+          res.json(true);
+        });
+      });
+  });
+};
+
+const saveUserDetails = (userDetails) => {
+  return new Promise((resolve, reject) => {
+    dbClient.hset("users", username, JSON.stringify(userDetails), () => {
+      resolve(true);
+    });
+  });
+};
+
+const getUserDetails = () => {
+  return new Promise((resolve, reject) => {
+    dbClient.hget("users", username, (err, data) => {
+      const details = data || "{}";
+      err && reject(err);
+      resolve(details);
+    });
   });
 };
 
@@ -76,11 +87,7 @@ const getCurrentUser = (req, res) => {
     res.json({});
     return;
   }
-  dbClient.hget("users", username, (err, data) => {
-    const details = data || "{}";
-    err && res.json(err);
-    res.json(details);
-  });
+  getUserDetails(username).then((details) => res.json(details));
 };
 
 module.exports = {

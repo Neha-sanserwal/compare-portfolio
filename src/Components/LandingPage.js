@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
+import Input from "./Input";
 export default function (args) {
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -11,14 +12,7 @@ export default function (args) {
         <h1>Hello, {(user && user.login) || ""} Welcome to Compare.</h1>
       </div>
       <div className="search_area">
-        <input
-          type="text"
-          name=""
-          id=""
-          onChange={(e) => {
-            console.log(e.target.value);
-          }}
-        />
+        <Input initialValue="" handleValue={() => {}} />
       </div>
     </div>
   );

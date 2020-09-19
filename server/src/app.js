@@ -10,7 +10,7 @@ app.use(cookieParser());
 
 app.get("/", (req, res) => res.send("welcome to server "));
 
-app.get("/api/getUser/:code", handlers.authenticateUser);
+app.get("/api/authorize", handlers.authenticateUser);
 
 app.get("/api/isRegisteredUser/:username", handlers.isRegisteredUser);
 
