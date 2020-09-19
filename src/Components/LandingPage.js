@@ -5,7 +5,7 @@ export default function (args) {
   const [user, setUser] = useState({});
   const [repoList, setRepoList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [cards, setCards] = useState([]);
   const debouncedSearch = useDebounce(searchTerm, 500);
 
   useEffect(() => {
@@ -25,6 +25,17 @@ export default function (args) {
       setRepoList(details);
     });
   };
+
+  const pushToCards = (id) => {
+    const [info] = repoList.filter((repo) => repo.id === id);
+    console.log(info, id);
+    if (info.id) {
+      setCards((prevCards) => [...prevCards, info]);
+    }
+    setRepoList([]);
+    setSearchTerm("");
+  };
+
   const List = repoList.map((repo, index) => {
     return (
       <div
@@ -35,14 +46,23 @@ export default function (args) {
           width: "1000px",
           margin: "0 auto",
         }}
-        onChange={() => {
-          // pushToCards(repo.id);
+        onClick={() => {
+          pushToCards(repo.id);
         }}
       >
         {repo.full_name}
       </div>
     );
   });
+  let Cards = cards.map((info) => (
+    <div key={info.id}>
+      <h3>{info.full_name}</h3>
+      <img src={info.owner.avatar_url} />
+      language: <div className="item">{info.language}</div>
+      forks: <div className="item">{info.forks}</div>
+      issues: <div className="item">{info.open_issues_count}</div>
+    </div>
+  ));
   return (
     <div className="page">
       <div className="banner">
@@ -54,6 +74,7 @@ export default function (args) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         {List}
+        {Cards}
       </div>
     </div>
   );
