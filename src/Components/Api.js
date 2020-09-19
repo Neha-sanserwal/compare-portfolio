@@ -65,3 +65,12 @@ export const getCurrentUser = () => {
       .catch(reject);
   });
 };
+
+export const getRepos = (value) => {
+  return new Promise((resolve, reject) => {
+    fetchGetRequest(`/api/repos/${value}`)
+      .then((res) => res.json())
+      .then(resolve)
+      .catch(reject);
+  });
+};

@@ -1,6 +1,5 @@
 const request = require("request");
 const { getClientID, getClientSecret } = require("../../config");
-const session = require("./session");
 
 const getGithubUser = (accessToken) => {
   return new Promise((resolve, reject) => {
@@ -17,6 +16,26 @@ const getGithubUser = (accessToken) => {
       (err, res, body) => {
         err && reject(err);
         resolve(body);
+      }
+    );
+  });
+};
+const getReposOf = (value) => {
+  return new Promise((resolve, reject) => {
+    request.get(
+      {
+        url: `https://api.github.com/search/repositories?q=${value}`,
+        headers: {
+          username: "Neha-sanserwal",
+          Authorization: `token d6ccca820a10d10d7842a1832b987a7138adcdc6`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "User-Agent": "node.js",
+        },
+      },
+      (err, res, body) => {
+        err && reject(err);
+        resolve(JSON.parse(body));
       }
     );
   });
@@ -98,8 +117,16 @@ const logout = (req, res) => {
   res.json();
 };
 
+const getRepos = (req, res) => {
+  const { username } = req.params;
+  getReposOf(username).then((details) => {
+    res.json(details.items);
+  });
+};
+
 module.exports = {
   authenticateUser,
   getCurrentUser,
   logout,
+  getRepos,
 };
