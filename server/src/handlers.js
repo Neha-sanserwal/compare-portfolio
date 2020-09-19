@@ -1,5 +1,6 @@
 const request = require("request");
 const { getClientID, getClientSecret } = require("../../config");
+const session = require("./session");
 
 const getGithubUser = (accessToken) => {
   return new Promise((resolve, reject) => {
@@ -45,36 +46,36 @@ const getAccessToken = (code) => {
   });
 };
 
-const authenticateUser = (req, res) => {
-  const { code } = req.query;
-  const { dbClient } = req.app.locals;
-  getAccessToken(code).then((accessToken) => {
-    getGithubUser(accessToken)
-      .then((githubDetails) => JSON.parse(githubDetails))
-      .then((githubDetails) => {
-        saveUserDetail(userDetails).then(() => {
-          res.cookie("sessionId", sessions.createSession(githubDetails.login));
-          res.redirect("http://localhost:3000/");
-          res.json(true);
-        });
-      });
-  });
-};
-
-const saveUserDetails = (userDetails) => {
+const saveUserDetails = (dbClient, userDetails) => {
+  const { login } = userDetails;
   return new Promise((resolve, reject) => {
-    dbClient.hset("users", username, JSON.stringify(userDetails), () => {
+    dbClient.hset("users", login, JSON.stringify(userDetails), () => {
       resolve(true);
     });
   });
 };
 
-const getUserDetails = () => {
+const authenticateUser = (req, res) => {
+  const { code } = req.query;
+  const { dbClient, sessions } = req.app.locals;
+  getAccessToken(code).then((accessToken) => {
+    getGithubUser(accessToken)
+      .then((githubDetails) => JSON.parse(githubDetails))
+      .then((githubDetails) => {
+        saveUserDetails(dbClient, githubDetails).then(() => {
+          res.cookie("sessionId", sessions.createSession(githubDetails.login));
+          res.redirect("http://localhost:3000/");
+        });
+      });
+  });
+};
+
+const getUserDetails = (dbClient, username) => {
   return new Promise((resolve, reject) => {
     dbClient.hget("users", username, (err, data) => {
       const details = data || "{}";
       err && reject(err);
-      resolve(details);
+      resolve(JSON.parse(details));
     });
   });
 };
@@ -87,13 +88,18 @@ const getCurrentUser = (req, res) => {
     res.json({});
     return;
   }
-  getUserDetails(username).then((details) => res.json(details));
+  getUserDetails(dbClient, username).then((details) => res.json(details));
+};
+
+const logout = (req, res) => {
+  const { sessions } = req.app.locals;
+  const { sessionId } = req.cookies;
+  sessions.removeSession(sessionId);
+  res.json();
 };
 
 module.exports = {
   authenticateUser,
-  isRegisteredUser,
-  registerUser,
-  loginUser,
   getCurrentUser,
+  logout,
 };

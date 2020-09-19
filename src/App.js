@@ -14,9 +14,6 @@ function App() {
           <Route exact path="/">
             <LandingPage />
           </Route>
-          {/* <Route exact path="/api/authorize">
-            <Login />
-          </Route> */}
 
           <Route>
             <h1>Not found</h1>
