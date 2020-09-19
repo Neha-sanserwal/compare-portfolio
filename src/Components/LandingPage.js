@@ -40,12 +40,6 @@ export default function (args) {
     return (
       <div
         key={repo.id}
-        style={{
-          border: "1px solid lightgray",
-          height: "100px",
-          width: "1000px",
-          margin: "0 auto",
-        }}
         onClick={() => {
           pushToCards(repo.id);
         }}

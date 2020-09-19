@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import * as Api from "./Api";
+import "./assets/css/navbar.css";
 
 const Navbar = function (props) {
   const [user, setUser] = useState({});
@@ -10,22 +11,33 @@ const Navbar = function (props) {
   }, []);
   return (
     <div className="navbar">
+      <div className="header">
+        <a href="/">
+          <img src={require("./assets/images/logo.png")} />
+        </a>
+      </div>
       {user.login ? (
-        <div style={{ display: "flex", width: "100%" }}>
-          <Link to="/profile">
-            <h3>{user.name}</h3>
-          </Link>
-          <Link to="/logout">
-            <button>Logout</button>
-          </Link>
+        <div className="navlist">
+          <div className="navItem">
+            <Link to="/profile">
+              <h3>{user.name}</h3>
+            </Link>
+          </div>
+          <div className="navItem">
+            <Link to="/logout">
+              <button className="theme-btn">Logout</button>
+            </Link>
+          </div>
         </div>
       ) : (
-        <div>
-          <a
-            href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`}
-          >
-            <button>Login with github</button>
-          </a>
+        <div className="navlist">
+          <div className="navItem">
+            <a
+              href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`}
+            >
+              <button className="theme-btn">Login with github</button>
+            </a>
+          </div>
         </div>
       )}
     </div>
