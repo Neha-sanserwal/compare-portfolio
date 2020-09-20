@@ -10,50 +10,156 @@
 	height: 5rem;
 }
 
+
+.search-area {
+	position: relative;
+	width: 80%;
+	margin: 5rem auto;
+}
+
 .search-area input {
 	border: 1px solid lightgray;
-	height: 3rem;
+	height: 4rem;
 	font-size: 1.2rem;
-	border-radius: 5px;
-	width: 50%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	width: 49.9%;
+	padding: 1rem;
+	box-sizing: border-box;
 	margin: 5rem 0 0 0;
 }
 
 .suggestion-box {
 	width: 50%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	background: #f9f9f9;
+	z-index: 2;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	margin: 0 auto;
 	display: flex;
-	height: 36rem;
-	overflow: auto;
+	max-height: 20rem;
+	height: -moz-fit-content;
+	height: fit-content;
+	overflow-y: auto;
 	flex-flow: column;
 	border: 1px solid lightgray;
+
 }
 
 .suggestion-item {
 	display: flex;
 	padding: 1rem;
+	flex-wrap: wrap;
 	box-sizing: border-box;
 	align-content: center;
 	text-align: justify;
-	min-height: 6rem;
+	min-height: 4rem;
 	margin: 0 auto;
 	justify-content: space-between;
 	border-bottom: 0.2px solid lightgrey;
 	width: 100%;
+	cursor: pointer;
+}
+
+.suggestion-item:hover {
+	background-color: #8c2ce619;
 }
 
 .suggestion-item .item-name {
+	display: flex;
+
 	flex-wrap: wrap;
 	width: 60%;
-	display: flex;
 	align-items: center;
-	font-weight: 600;
-	font-size: 1.5rem;
+	font-weight: 500;
+	font-size: 1rem;
 
 }
 
+
 .suggestion-item .item-img img {
+	height: 30px;
+}
+
+.card {
+	display: flex;
+	position: relative;
+	margin: 3rem 0 3rem 0rem;
+	border: 0.5px solid #e7e7e5;
+	border-radius: 5px;
+	flex-flow: column;
+	width: 450px;
+	box-shadow: 1px 2px 9px 3px #e7e7e7;
+}
+
+.card .delete-Icon {
+	position: absolute;
+	font-size: 2rem;
+	top: -1rem;
+	right: -0.5rem;
+	color: #c0c0c091;
+}
+
+.card .delete-Icon:hover {
+	position: absolute;
+	font-size: 2rem;
+	top: -1rem;
+	right: -0.5rem;
+	color: #bf3f3f;
+}
+
+.compare-cards {
+	margin-top: 5rem;
+	height: 7rem;
+	display: flex;
+	flex-flow: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+.card-header {
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	height: 6rem;
+	align-items: center;
+	padding: 1rem;
+	box-sizing: border-box;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+
+.card-header img {
 	height: 50px;
+}
+
+.card .item {
+	display: flex;
+	height: 4rem;
+	align-items: center;
+	font-size: 1rem;
+	padding: 0 2rem;
+	box-sizing: border-box;
+	margin: 0 auto;
+	justify-content: space-between;
+	width: 100%;
+	border-bottom: 0.5px solid #E7E7E54a;
+}
+
+.card .item:hover {
+	background-color: #f9f9f9;
+}
+
+.card .item .label {
+	display: flex;
+	flex-wrap: wrap;
+	width: 50%;
+}
+
+.label * {
+	margin-right: 0.8rem;
 }
