@@ -19,6 +19,14 @@ export default function (args) {
     search(debouncedSearch);
   }, [debouncedSearch]);
 
+  useEffect(() => {
+    setCards(JSON.parse(localStorage.getItem("cards")));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cards", JSON.stringify(cards));
+  }, [cards]);
+
   const search = (value) => {
     Api.getRepos(value).then(setRepoList);
   };

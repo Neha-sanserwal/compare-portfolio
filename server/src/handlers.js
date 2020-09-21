@@ -20,6 +20,7 @@ const getGithubUser = (accessToken) => {
     );
   });
 };
+
 const getReposOf = (value) => {
   return new Promise((resolve, reject) => {
     request.get(
@@ -40,6 +41,7 @@ const getReposOf = (value) => {
     );
   });
 };
+
 const getAccessToken = (code) => {
   return new Promise((resolve, reject) => {
     request.post(
@@ -114,7 +116,7 @@ const logout = (req, res) => {
   const { sessions } = req.app.locals;
   const { sessionId } = req.cookies;
   sessions.removeSession(sessionId);
-  res.json();
+  res.redirect("http://localhost:3000/");
 };
 
 const getRepos = (req, res) => {

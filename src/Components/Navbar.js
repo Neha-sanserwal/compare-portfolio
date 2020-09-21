@@ -9,6 +9,13 @@ const Navbar = function (props) {
   useEffect(() => {
     Api.getCurrentUser().then(setUser);
   }, []);
+
+  const handleLogout = () => {
+    Api.logout().then(() => {
+      setUser({});
+    });
+  };
+
   return (
     <div className="navbar">
       <div className="header">
@@ -24,9 +31,9 @@ const Navbar = function (props) {
             </Link>
           </div>
           <div className="navItem">
-            <Link to="/logout">
-              <button className="theme-btn">Logout</button>
-            </Link>
+            <button className="theme-btn" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </div>
       ) : (
