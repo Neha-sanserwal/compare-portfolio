@@ -126,9 +126,18 @@ const getRepos = (req, res) => {
   });
 };
 
+const saveComparisons = (req, res) => {
+  const { username, cards } = req.body;
+  const { dbClient } = req.app.locals;
+  dbClient.hset("cards", username, JSON.stringify(cards), () => {
+    res.json(true);
+  });
+};
+
 module.exports = {
   authenticateUser,
   getCurrentUser,
   logout,
   getRepos,
+  saveComparisons,
 };

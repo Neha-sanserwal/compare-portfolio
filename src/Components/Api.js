@@ -6,7 +6,7 @@ const fetchGetRequest = (url, headers) => {
     accept: "application/json",
   };
   return fetch(url, {
-    method: "GET",
+    method: GET,
     headers: headers || defaultHeaders,
   });
 };
@@ -60,6 +60,15 @@ export const getCurrentUser = () => {
 export const getRepos = (value) => {
   return new Promise((resolve, reject) => {
     fetchGetRequest(`/api/repos/${value}`)
+      .then((res) => res.json())
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+export const saveComparisons = (username, cards) => {
+  return new Promise((resolve, reject) => {
+    fetchPostRequest("/api/saveComparisons", { username, cards })
       .then((res) => res.json())
       .then(resolve)
       .catch(reject);

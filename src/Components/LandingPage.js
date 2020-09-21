@@ -6,10 +6,16 @@ import List from "./searchSuggestion";
 import Cards from "./Cards";
 
 export default function (args) {
+  const [user, setUser] = useState({});
   const [repoList, setRepoList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [cards, setCards] = useState([]);
   const debouncedSearch = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    Api.getCurrentUser().then(setUser);
+    setCards(JSON.parse(localStorage.getItem("cards")));
+  }, []);
 
   useEffect(() => {
     if (!debouncedSearch) {
@@ -18,10 +24,6 @@ export default function (args) {
     }
     search(debouncedSearch);
   }, [debouncedSearch]);
-
-  useEffect(() => {
-    setCards(JSON.parse(localStorage.getItem("cards")));
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("cards", JSON.stringify(cards));
@@ -44,9 +46,20 @@ export default function (args) {
     setCards(cards.filter((card) => card.id !== id));
   };
 
+  const saveComparisons = () => {
+    Api.saveComparisons(user.login, cards);
+  };
+
+  let saveBtn;
+  if (user.login && cards.length) {
+    saveBtn = (
+      <div>
+        <button onClick={saveComparisons}>Save</button>
+      </div>
+    );
+  }
   return (
     <div className="page">
-      <div className="banner"></div>
       <div className="search-area">
         <input
           value={searchTerm}
@@ -54,11 +67,10 @@ export default function (args) {
         />
         <List list={repoList} handleClick={pushToCards} />
       </div>
-      {Cards && (
-        <div className="compare-cards">
-          <Cards cards={cards} deleteCard={deleteCard} />
-        </div>
-      )}
+      <div className="compare-cards">
+        <Cards cards={cards} deleteCard={deleteCard} />
+      </div>
+      {saveBtn}
     </div>
   );
 }
