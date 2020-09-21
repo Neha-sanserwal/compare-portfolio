@@ -74,3 +74,11 @@ export const saveComparisons = (username, cards) => {
       .catch(reject);
   });
 };
+
+export const getComparisons = () => {
+  return new Promise((resolve, reject) => {
+    fetchGetRequest("/api/getComparisons")
+      .then((res) => res.json())
+      .then(resolve);
+  });
+};

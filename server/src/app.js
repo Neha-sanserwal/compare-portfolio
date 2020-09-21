@@ -14,6 +14,7 @@ app.get("/api/authorize", handlers.authenticateUser);
 app.get("/api/repos/:username", handlers.getRepos);
 app.get("/api/currentUser", handlers.getCurrentUser);
 app.post("/api/saveComparisons", handlers.saveComparisons);
+app.get("/api/getComparisons", handlers.getComparisons);
 app.post("/api/logout", handlers.logout);
 
 module.exports = { app };

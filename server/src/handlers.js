@@ -129,8 +129,19 @@ const getRepos = (req, res) => {
 const saveComparisons = (req, res) => {
   const { username, cards } = req.body;
   const { dbClient } = req.app.locals;
-  dbClient.hset("cards", username, JSON.stringify(cards), () => {
+
+  dbClient.hset("cards", username, JSON.stringify([cards]), () => {
     res.json(true);
+  });
+};
+
+const getComparisons = (req, res) => {
+  const { dbClient, sessions } = req.app.locals;
+  const { sessionId } = req.cookies;
+  const username = sessions.getSession(sessionId);
+  dbClient.hget("cards", username, (err, data) => {
+    const details = data || "[]";
+    res.json(JSON.parse(details));
   });
 };
 
@@ -140,4 +151,5 @@ module.exports = {
   logout,
   getRepos,
   saveComparisons,
+  getComparisons,
 };
