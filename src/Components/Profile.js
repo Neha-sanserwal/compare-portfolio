@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
 import Cards from "./Cards";
-import useSessionUser from "./hooks/useSessionUser";
 const Profile = (props) => {
-  const [user] = useSessionUser();
   const [comparisons, setComparisons] = useState({});
   const [queue, setQueue] = useState([]);
 
   useEffect(() => {
-    Api.getComparisons().then(setComparisons);
-    Api.getQueue().then(setQueue);
+    Api.getComparisons().then(({ orderList, comparisons }) => {
+      console.log(orderList);
+      setQueue(orderList);
+      setComparisons(comparisons);
+    });
   }, []);
 
   const comparisonComponent = queue.map((id) => (
     <div key={id} className="comparison">
+      {console.log(comparisons, [id])}
       {comparisons[id] && <Cards cards={JSON.parse(comparisons[id])} />}
     </div>
   ));

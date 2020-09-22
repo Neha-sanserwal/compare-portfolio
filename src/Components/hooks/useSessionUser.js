@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import * as Api from "../Api";
 
-export default () => {
+export default (isLoggedIn) => {
   const [user, setUser] = useState({});
   useEffect(() => {
     Api.getCurrentUser().then(setUser);
-  }, []);
-  return [user, setUser];
+  }, [isLoggedIn]);
+  return user;
 };

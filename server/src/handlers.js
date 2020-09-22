@@ -1,71 +1,4 @@
-const request = require("request");
-const { getClientID, getClientSecret } = require("../../config");
-
-const getGithubUser = (accessToken) => {
-  return new Promise((resolve, reject) => {
-    request.get(
-      {
-        url: "https://api.github.com/user",
-        headers: {
-          Authorization: `token ${accessToken}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "User-Agent": "node.js",
-        },
-      },
-      (err, res, body) => {
-        err && reject(err);
-        resolve(body);
-      }
-    );
-  });
-};
-
-const getReposOf = (value) => {
-  return new Promise((resolve, reject) => {
-    request.get(
-      {
-        url: `https://api.github.com/search/repositories?q=${value}`,
-        headers: {
-          username: "Neha-sanserwal",
-          Authorization: `token d6ccca820a10d10d7842a1832b987a7138adcdc6`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "User-Agent": "node.js",
-        },
-      },
-      (err, res, body) => {
-        err && reject(err);
-        resolve(JSON.parse(body));
-      }
-    );
-  });
-};
-
-const getAccessToken = (code) => {
-  return new Promise((resolve, reject) => {
-    request.post(
-      {
-        url: "https://github.com/login/oauth/access_token",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          client_id: getClientID(),
-          client_secret: getClientSecret(),
-          code: code,
-        }),
-      },
-      (error, response, body) => {
-        error && reject(error);
-        const parsedBody = JSON.parse(body);
-        const accessToken = parsedBody["access_token"];
-        resolve(accessToken);
-      }
-    );
-  });
-};
+const { getReposOf, getGithubUser, getAccessToken } = require("./gitApi");
 
 const saveUserDetails = (dbClient, userDetails) => {
   const { login } = userDetails;
@@ -145,20 +78,28 @@ const saveComparisons = (req, res) => {
   });
 };
 
+const getQueue = (dbClient) => {
+  return new Promise((resolve, reject) => {
+    dbClient.lrange("comparisons", 0, -1, (err, data) => {
+      err && reject(err);
+      resolve(data);
+    });
+  });
+};
+
 const getComparisons = (req, res) => {
   const { dbClient, sessions } = req.app.locals;
   const { sessionId } = req.cookies;
   const username = sessions.getSession(sessionId);
-  dbClient.hgetall(username, (err, data) => {
-    const details = data || {};
-    res.json(details);
-  });
-};
-
-const getQueue = (req, res) => {
-  const { dbClient, sessions } = req.app.locals;
-  dbClient.lrange("comparisons", 0, -1, (err, data) => {
-    res.json(data);
+  if (!username) {
+    res.redirect("/");
+    return;
+  }
+  getQueue(dbClient).then((orderList) => {
+    dbClient.hgetall(username, (err, data) => {
+      const comparisons = data || {};
+      res.json({ comparisons, orderList });
+    });
   });
 };
 
