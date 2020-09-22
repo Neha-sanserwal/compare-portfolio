@@ -12,11 +12,13 @@ const DeleteBtn = (props) => {
 export default (props) => {
   return props.cards.map((info) => (
     <div className="card" key={info.id}>
-      <DeleteBtn
-        handleClick={() => {
-          props.deleteCard(info.id);
-        }}
-      />
+      {props.deleteCard && (
+        <DeleteBtn
+          handleClick={() => {
+            props.deleteCard(info.id);
+          }}
+        />
+      )}
       <div className="card-header">
         <div>{info.full_name}</div>
         <img src={info.owner.avatar_url} />

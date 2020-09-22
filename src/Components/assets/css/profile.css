@@ -1,0 +1,22 @@
+.comparisons {
+	display: flex;
+	margin: 0 auto;
+	width: 60%;
+	justify-content: space-between;
+}
+
+.comparison {
+	display: flex;
+	flex-flow: column;
+	flex-wrap: wrap;
+}
+
+.comparison .icon {
+	margin-bottom: 1rem;
+	font-size: 5rem;
+}
+
+.comparison .icon a {
+	text-decoration: none;
+	color: #a876d6fa;
+}

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Api from "./Api";
 import Cards from "./Cards";
+import "./assets/css/profile.css";
+
 const Profile = (props) => {
   const [queue, setQueue] = useState([]);
 
@@ -11,11 +13,16 @@ const Profile = (props) => {
 
   const comparisonComponent = queue.map((id) => (
     <div key={id} className="comparison">
-      <Link to={`/comparisons/${id}`}>{`comparison_${id}`}</Link>
+      <div className="icon">
+        <Link to={`/comparisons/${id}`}>
+          <i class="fa fa-folder" aria-hidden="true"></i>
+        </Link>
+      </div>
+      <div className="name">{`comparison_${id}`}</div>
     </div>
   ));
   return (
-    <div className="profile">
+    <div className="page">
       <div className="comparisons">{comparisonComponent}</div>
     </div>
   );

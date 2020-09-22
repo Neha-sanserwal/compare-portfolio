@@ -9,9 +9,12 @@ const WithComparisons = (props) => {
     Api.getComparison(id).then(setCards);
   }, []);
   return (
-    <div className="profile">
+    <div className="page">
+      <h2>{`Comparison${id}`}</h2>
       <div className="comparison">
-        <Cards cards={cards} />
+        <div className="compare-cards">
+          <Cards cards={cards} />
+        </div>
       </div>
     </div>
   );
