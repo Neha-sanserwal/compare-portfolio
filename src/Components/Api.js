@@ -82,3 +82,11 @@ export const getComparisons = () => {
       .then(resolve);
   });
 };
+
+export const getQueue = () => {
+  return new Promise((resolve, reject) => {
+    fetchGetRequest("/api/getQueue")
+      .then((res) => res.json())
+      .then(resolve);
+  });
+};

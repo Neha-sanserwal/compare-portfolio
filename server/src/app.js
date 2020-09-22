@@ -16,5 +16,5 @@ app.get("/api/currentUser", handlers.getCurrentUser);
 app.post("/api/saveComparisons", handlers.saveComparisons);
 app.get("/api/getComparisons", handlers.getComparisons);
 app.post("/api/logout", handlers.logout);
-
+app.get("/api/getQueue", handlers.getQueue);
 module.exports = { app };

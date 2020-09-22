@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
-
+import Cards from "./Cards";
+import useSessionUser from "./hooks/useSessionUser";
 const Profile = (props) => {
-  const [user, setUser] = useState({});
-  const [cards, setCards] = useState([]);
+  const [user] = useSessionUser();
+  const [comparisons, setComparisons] = useState({});
+  const [queue, setQueue] = useState([]);
+
   useEffect(() => {
-    Api.getCurrentUser().then(setUser);
-    Api.getComparisons().then(setCards);
+    Api.getComparisons().then(setComparisons);
+    Api.getQueue().then(setQueue);
   }, []);
 
-  return <div className="profile"></div>;
+  const comparisonComponent = queue.map((id) => (
+    <div key={id} className="comparison">
+      {comparisons[id] && <Cards cards={JSON.parse(comparisons[id])} />}
+    </div>
+  ));
+  return (
+    <div className="profile">
+      <div className="comparisons">{comparisonComponent}</div>
+    </div>
+  );
 };
 
 export default Profile;
