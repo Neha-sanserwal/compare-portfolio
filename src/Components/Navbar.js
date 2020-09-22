@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as Api from "./Api";
 import "./assets/css/navbar.css";
 
 const Navbar = function (props) {
   const [user, setUser] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     Api.getCurrentUser().then(setUser);
   }, []);
 
   const handleLogout = () => {
-    Api.logout().then(() => {
-      setUser({});
+    Api.logout().then((isLoggedOut) => {
+      if (isLoggedOut) {
+        history.push("/");
+        setUser({});
+      }
     });
   };
 
   return (
     <div className="navbar">
       <div className="header">
-        <a href="/">
+        <Link to="/">
           <img alt="comparer" src={require("./assets/images/logo.png")} />
-        </a>
+        </Link>
       </div>
       {user.login ? (
         <div className="navlist">

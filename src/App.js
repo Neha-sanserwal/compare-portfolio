@@ -5,7 +5,6 @@ import LandingPage from "./Components/LandingPage";
 import Navbar from "./Components/Navbar";
 import Profile from "./Components/Profile";
 import WithComparisons from "./Components/WithComparisons";
-
 function App() {
   return (
     <div className="App">
@@ -16,7 +15,7 @@ function App() {
             <LandingPage />
           </Route>
           <Route exact path="/profile">
-            <Profile></Profile>
+            <Profile />
           </Route>
           <Route exact path={"/comparisons/:id"}>
             <WithComparisons />

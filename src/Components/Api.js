@@ -45,11 +45,8 @@ export const registerUser = (username, userDetails) => {
 export const logout = () => {
   return new Promise((resolve, reject) => {
     fetchPostRequest(`/api/logout`)
-      .then((res) => {
-        if (res.redirected) {
-          window.location.href = res.url;
-        }
-      })
+      .then((res) => res.json())
+      .then(resolve)
       .catch(reject);
   });
 };

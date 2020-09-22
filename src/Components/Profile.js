@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Api from "./Api";
 import "./assets/css/profile.css";
+import withAuthorization from "./hoc/withAuthorization";
 
 const Profile = (props) => {
   const [queue, setQueue] = useState([]);
@@ -29,4 +30,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default withAuthorization(Profile);

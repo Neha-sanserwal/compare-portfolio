@@ -49,8 +49,7 @@ const logout = (req, res) => {
   const { sessions } = req.app.locals;
   const { sessionId } = req.cookies;
   sessions.removeSession(sessionId);
-  res.redirect("/");
-  res.end();
+  res.json({ isLoggedOut: true });
 };
 
 const getRepos = (req, res) => {
@@ -102,10 +101,6 @@ const getOrderList = (req, res) => {
   const { dbClient, sessions } = req.app.locals;
   const { sessionId } = req.cookies;
   const username = sessions.getSession(sessionId);
-  if (!username) {
-    res.redirect("/");
-    return;
-  }
   getQueue(dbClient, "comparisons").then((data) => {
     res.json(data);
   });
@@ -125,10 +120,6 @@ const getComparison = (req, res) => {
   const { sessionId } = req.cookies;
   const { id } = req.params;
   const username = sessions.getSession(sessionId);
-  if (!username) {
-    res.redirect("/");
-    return;
-  }
   getComparisonCards(dbClient, id, username).then((details) => {
     const comparison = details || "[]";
     res.json(JSON.parse(comparison));
