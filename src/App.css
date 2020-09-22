@@ -15,8 +15,18 @@
   border-radius: 5px;
   min-width: 8rem;
   height: 3rem;
-  border: 0.1rem solid white;
+  border: 0.1rem solid blueviolet;
   font-size: 1.2rem;
   background: none;
-  color: white;
+  color: blueviolet;
+}
+
+.theme-btn:hover {
+  border-radius: 5px;
+  min-width: 8rem;
+  height: 3rem;
+  border: 0.1rem solid blueviolet;
+  font-size: 1.2rem;
+  background: blueviolet;
+  color: white
 }

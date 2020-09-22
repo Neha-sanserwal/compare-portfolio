@@ -54,11 +54,12 @@ const logout = (req, res) => {
 };
 
 const getRepos = (req, res) => {
-  const { username } = req.params;
-  getReposOf(username).then((details) => {
+  const { query } = req.params;
+  getReposOf(query).then((details) => {
     res.json(details.items);
   });
 };
+
 const incrComparisonId = (dbClient) => {
   return new Promise((resolve, reject) => {
     dbClient.incr("comparisonId", (err, id) => {
@@ -67,6 +68,7 @@ const incrComparisonId = (dbClient) => {
     });
   });
 };
+
 const saveComparisons = (req, res) => {
   const { username, cards } = req.body;
   const { dbClient } = req.app.locals;
@@ -118,7 +120,6 @@ const getComparison = (req, res) => {
     return;
   }
   getComparisonCards(dbClient, id, username).then((comparison) => {
-    console.log(comparison);
     res.json(JSON.parse(comparison));
   });
 };

@@ -31,7 +31,7 @@ const Navbar = function (props) {
             </Link>
           </div>
           <div className="navItem">
-            <button className="theme-btn" onClick={handleLogout}>
+            <button className="nav-btn" onClick={handleLogout}>
               Logout
             </button>
           </div>
@@ -42,7 +42,7 @@ const Navbar = function (props) {
             <a
               href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`}
             >
-              <button className="theme-btn">Login with github</button>
+              <button className="nav-btn">Login with github</button>
             </a>
           </div>
         </div>

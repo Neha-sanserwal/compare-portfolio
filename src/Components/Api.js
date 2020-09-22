@@ -81,20 +81,6 @@ export const saveComparisons = (username, cards) => {
   });
 };
 
-export const getComparisons = () => {
-  return new Promise((resolve, reject) => {
-    fetchGetRequest("/api/getComparisons")
-      .then((res) => {
-        if (res.redirected) {
-          window.location.href = res.url;
-          return { message: "Please Login" };
-        }
-        return res.json();
-      })
-      .then(resolve);
-  });
-};
-
 export const getOrderList = () => {
   return new Promise((resolve, reject) => {
     fetchGetRequest("/api/getOrderList")

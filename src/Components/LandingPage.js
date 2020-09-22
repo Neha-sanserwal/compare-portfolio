@@ -4,7 +4,8 @@ import useDebounce from "./hooks/useDebounce";
 import "./assets/css/landing.css";
 import List from "./searchSuggestion";
 import Cards from "./Cards";
-export default function (args) {
+
+export default function (props) {
   const [user, setUser] = useState({});
   const [repoList, setRepoList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,16 +22,12 @@ export default function (args) {
       setRepoList([]);
       return;
     }
-    search(debouncedSearch);
+    Api.getRepos(debouncedSearch).then(setRepoList);
   }, [debouncedSearch]);
 
   useEffect(() => {
     localStorage.setItem("cards", JSON.stringify(cards));
   }, [cards]);
-
-  const search = (value) => {
-    Api.getRepos(value).then(setRepoList);
-  };
 
   const pushToCards = (id) => {
     const [info] = repoList.filter((repo) => repo.id === id);
@@ -54,7 +51,9 @@ export default function (args) {
   if (user.login && cards.length) {
     saveBtn = (
       <div>
-        <button onClick={saveComparisons}>Save</button>
+        <button className="theme-btn" onClick={saveComparisons}>
+          Save
+        </button>
       </div>
     );
   }
