@@ -4,7 +4,7 @@ const DeleteBtn = (props) => {
   const { handleClick } = props;
   return (
     <div className="delete-Icon" onClick={handleClick}>
-      <i class="fa fa-times-circle" aria-hidden="true"></i>
+      <i className="fa fa-times-circle" aria-hidden="true"></i>
     </div>
   );
 };
@@ -13,11 +13,13 @@ export default (props) => {
   return props.cards.map((info) => (
     <div className="card" key={info.id}>
       {props.deleteCard && (
-        <DeleteBtn
-          handleClick={() => {
-            props.deleteCard(info.id);
-          }}
-        />
+        <div>
+          <DeleteBtn
+            handleClick={() => {
+              props.deleteCard(info.id);
+            }}
+          />
+        </div>
       )}
       <div className="card-header">
         <div>{info.full_name}</div>

@@ -48,12 +48,23 @@ export default function (props) {
   };
 
   let saveBtn;
-  if (user.login && cards.length) {
+  if (cards.length) {
     saveBtn = (
-      <div>
-        <button className="theme-btn" onClick={saveComparisons}>
-          Save
+      <div className="btns">
+        <button
+          className="btn danger-btn"
+          onClick={() => {
+            setCards([]);
+          }}
+        >
+          Reset
         </button>
+
+        {user.login && (
+          <button className="btn theme-btn" onClick={saveComparisons}>
+            Save comparison
+          </button>
+        )}
       </div>
     );
   }

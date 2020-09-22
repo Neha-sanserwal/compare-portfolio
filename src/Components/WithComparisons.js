@@ -5,9 +5,13 @@ import Cards from "./Cards";
 const WithComparisons = (props) => {
   const [cards, setCards] = useState([]);
   const { id } = useParams();
+
   useEffect(() => {
     Api.getComparison(id).then(setCards);
   }, []);
+  const deleteComparison = () => {
+    console.log("deleted");
+  };
   return (
     <div className="page">
       <h2>{`Comparison${id}`}</h2>
@@ -15,6 +19,14 @@ const WithComparisons = (props) => {
         <div className="compare-cards">
           <Cards cards={cards} />
         </div>
+      </div>
+      <div className="btns">
+        <Link to={"/profile"}>
+          <button className="btn theme-btn">Go to Comparisons</button>
+        </Link>
+        <button className="btn danger-btn" onClick={deleteComparison}>
+          Delete
+        </button>
       </div>
     </div>
   );
