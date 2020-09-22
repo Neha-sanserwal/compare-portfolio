@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import * as Api from "./Api";
 import Cards from "./Cards";
 const Profile = (props) => {
-  const [comparisons, setComparisons] = useState({});
   const [queue, setQueue] = useState([]);
 
   useEffect(() => {
-    Api.getComparisons().then(({ orderList, comparisons }) => {
-      console.log(orderList);
-      setQueue(orderList);
-      setComparisons(comparisons);
-    });
+    Api.getOrderList().then(setQueue);
   }, []);
 
   const comparisonComponent = queue.map((id) => (
     <div key={id} className="comparison">
-      {console.log(comparisons, [id])}
-      {comparisons[id] && <Cards cards={JSON.parse(comparisons[id])} />}
+      <Link to={`/comparisons/${id}`}>{`comparison_${id}`}</Link>
     </div>
   ));
   return (

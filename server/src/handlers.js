@@ -78,16 +78,15 @@ const saveComparisons = (req, res) => {
   });
 };
 
-const getQueue = (dbClient) => {
+const getQueue = (dbClient, queue) => {
   return new Promise((resolve, reject) => {
-    dbClient.lrange("comparisons", 0, -1, (err, data) => {
+    dbClient.lrange(queue, 0, -1, (err, data) => {
       err && reject(err);
       resolve(data);
     });
   });
 };
-
-const getComparisons = (req, res) => {
+const getOrderList = (req, res) => {
   const { dbClient, sessions } = req.app.locals;
   const { sessionId } = req.cookies;
   const username = sessions.getSession(sessionId);
@@ -95,11 +94,32 @@ const getComparisons = (req, res) => {
     res.redirect("/");
     return;
   }
-  getQueue(dbClient).then((orderList) => {
-    dbClient.hgetall(username, (err, data) => {
-      const comparisons = data || {};
-      res.json({ comparisons, orderList });
+  getQueue(dbClient, "comparisons").then((data) => {
+    res.json(data);
+  });
+};
+
+const getComparisonCards = (dbClient, id, username) => {
+  return new Promise((resolve, reject) => {
+    dbClient.hget(username, id, (err, data) => {
+      const comparison = data || [];
+      resolve(comparison);
     });
+  });
+};
+
+const getComparison = (req, res) => {
+  const { dbClient, sessions } = req.app.locals;
+  const { sessionId } = req.cookies;
+  const { id } = req.params;
+  const username = sessions.getSession(sessionId);
+  if (!username) {
+    res.redirect("/");
+    return;
+  }
+  getComparisonCards(dbClient, id, username).then((comparison) => {
+    console.log(comparison);
+    res.json(JSON.parse(comparison));
   });
 };
 
@@ -109,6 +129,6 @@ module.exports = {
   logout,
   getRepos,
   saveComparisons,
-  getComparisons,
-  getQueue,
+  getComparison,
+  getOrderList,
 };

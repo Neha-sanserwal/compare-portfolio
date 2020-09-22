@@ -4,7 +4,6 @@ import useDebounce from "./hooks/useDebounce";
 import "./assets/css/landing.css";
 import List from "./searchSuggestion";
 import Cards from "./Cards";
-
 export default function (args) {
   const [user, setUser] = useState({});
   const [repoList, setRepoList] = useState([]);
@@ -48,6 +47,7 @@ export default function (args) {
 
   const saveComparisons = () => {
     Api.saveComparisons(user.login, cards);
+    setCards([]);
   };
 
   let saveBtn;

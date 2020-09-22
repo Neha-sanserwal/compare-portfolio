@@ -95,10 +95,30 @@ export const getComparisons = () => {
   });
 };
 
-export const getQueue = () => {
+export const getOrderList = () => {
   return new Promise((resolve, reject) => {
-    fetchGetRequest("/api/getQueue")
-      .then((res) => res.json())
+    fetchGetRequest("/api/getOrderList")
+      .then((res) => {
+        if (res.redirected) {
+          window.location.href = res.url;
+          return { message: "Please Login" };
+        }
+        return res.json();
+      })
+      .then(resolve);
+  });
+};
+
+export const getComparison = (id) => {
+  return new Promise((resolve, reject) => {
+    fetchGetRequest(`/api/getComparison/${id}`)
+      .then((res) => {
+        if (res.redirected) {
+          window.location.href = res.url;
+          return { message: "Please Login" };
+        }
+        return res.json();
+      })
       .then(resolve);
   });
 };
