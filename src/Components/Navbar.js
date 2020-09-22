@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Api from "./Api";
 import "./assets/css/navbar.css";
 
@@ -20,7 +20,7 @@ const Navbar = function (props) {
     <div className="navbar">
       <div className="header">
         <a href="/">
-          <img src={require("./assets/images/logo.png")} />
+          <img alt="comparer" src={require("./assets/images/logo.png")} />
         </a>
       </div>
       {user.login ? (

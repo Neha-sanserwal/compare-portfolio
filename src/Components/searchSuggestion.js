@@ -14,7 +14,7 @@ export default (props) => {
     >
       <div className="item-name"> {repo.full_name}</div>
       <div className="item-img">
-        <img src={repo.owner.avatar_url} />
+        <img alt={repo.name} src={repo.owner.avatar_url} />
       </div>
     </div>
   ));

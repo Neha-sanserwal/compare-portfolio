@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Api from "./Api";
-import Cards from "./Cards";
 import "./assets/css/profile.css";
 
 const Profile = (props) => {

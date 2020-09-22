@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import * as Api from "./Api";
 import Cards from "./Cards";
 const WithComparisons = (props) => {
+  const history = useHistory();
   const [cards, setCards] = useState([]);
   const { id } = useParams();
 
@@ -11,7 +12,9 @@ const WithComparisons = (props) => {
   }, []);
 
   const deleteComparison = () => {
-    Api.deleteComparison(id);
+    Api.deleteComparison(id).then(({ isComparisonDeleted }) => {
+      isComparisonDeleted && history.push("/profile");
+    });
   };
 
   return (

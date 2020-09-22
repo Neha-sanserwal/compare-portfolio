@@ -150,13 +150,14 @@ const deleteComparison = (req, res) => {
   const { id } = req.body;
   const username = sessions.getSession(sessionId);
   if (!username) {
-    res.redirect("/");
+    res.json({ message: "Please login" });
     return;
   }
-  deleteComparisonCards(dbClient, id, username).then(() => {
-    deleteQueueId(dbClient, "comparisons", id).then(() => {
-      res.redirect("/profile");
-    });
+  deleteComparisonCards(dbClient, id, username).then((isDeleted) => {
+    isDeleted &&
+      deleteQueueId(dbClient, "comparisons", id).then((isComparisonDeleted) => {
+        res.json({ isComparisonDeleted });
+      });
   });
 };
 
