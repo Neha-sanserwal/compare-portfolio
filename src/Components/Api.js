@@ -108,3 +108,18 @@ export const getComparison = (id) => {
       .then(resolve);
   });
 };
+
+export const deleteComparison = (id) => {
+  console.log(id);
+  return new Promise((resolve, reject) => {
+    fetchPostRequest(`/api/deleteComparison`, { id })
+      .then((res) => {
+        if (res.redirected) {
+          window.location.href = res.url;
+          return;
+        }
+        return res.json();
+      })
+      .then(resolve);
+  });
+};

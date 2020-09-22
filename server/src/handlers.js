@@ -88,6 +88,16 @@ const getQueue = (dbClient, queue) => {
     });
   });
 };
+
+const deleteQueueId = (dbClient, key, id) => {
+  return new Promise((resolve, reject) => {
+    dbClient.lrem(key, -1, id, (err, data) => {
+      err && reject(err);
+      resolve(data);
+    });
+  });
+};
+
 const getOrderList = (req, res) => {
   const { dbClient, sessions } = req.app.locals;
   const { sessionId } = req.cookies;
@@ -119,8 +129,34 @@ const getComparison = (req, res) => {
     res.redirect("/");
     return;
   }
-  getComparisonCards(dbClient, id, username).then((comparison) => {
+  getComparisonCards(dbClient, id, username).then((details) => {
+    const comparison = details || "[]";
     res.json(JSON.parse(comparison));
+  });
+};
+
+const deleteComparisonCards = (dbClient, id, username) => {
+  return new Promise((resolve, reject) => {
+    dbClient.hdel(username, id, (err) => {
+      err && reject(err);
+      resolve(true);
+    });
+  });
+};
+
+const deleteComparison = (req, res) => {
+  const { dbClient, sessions } = req.app.locals;
+  const { sessionId } = req.cookies;
+  const { id } = req.body;
+  const username = sessions.getSession(sessionId);
+  if (!username) {
+    res.redirect("/");
+    return;
+  }
+  deleteComparisonCards(dbClient, id, username).then(() => {
+    deleteQueueId(dbClient, "comparisons", id).then(() => {
+      res.redirect("/profile");
+    });
   });
 };
 
@@ -132,4 +168,5 @@ module.exports = {
   saveComparisons,
   getComparison,
   getOrderList,
+  deleteComparison,
 };

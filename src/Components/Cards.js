@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Moment from "react-moment";
 
 const DeleteBtn = (props) => {
   const { handleClick } = props;
@@ -58,15 +59,18 @@ export default (props) => {
           <i className="fa fa-birthday-cake" aria-hidden="true"></i>
           Created At
         </div>
-
-        {info.created_at}
+        <Moment fromNow interval={2000}>
+          {info.created_at}
+        </Moment>
       </div>
       <div className="item">
         <div className="label">
           <i className="fa fa-wrench" aria-hidden="true"></i>
           Last update
         </div>
-        {info.updated_at}
+        <Moment fromNow interval={2000}>
+          {info.updated_at}
+        </Moment>
       </div>
     </div>
   ));

@@ -45,12 +45,6 @@
 
 .danger-btn {
   border: 0.1rem solid red;
-  background: none;
-  color: red;
-}
-
-.danger-btn:hover {
-  border: 0.1rem solid red;
   background: red;
   color: white
 }

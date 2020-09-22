@@ -23,6 +23,8 @@ const Profile = (props) => {
   ));
   return (
     <div className="page">
+      <h2>My Comparisons</h2>
+
       <div className="comparisons">{comparisonComponent}</div>
     </div>
   );

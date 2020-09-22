@@ -31,7 +31,7 @@ const Navbar = function (props) {
             </Link>
           </div>
           <div className="navItem">
-            <button className="btn nav-btn" onClick={handleLogout}>
+            <button className="btn danger-btn" onClick={handleLogout}>
               Logout
             </button>
           </div>

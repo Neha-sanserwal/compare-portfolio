@@ -9,9 +9,11 @@ const WithComparisons = (props) => {
   useEffect(() => {
     Api.getComparison(id).then(setCards);
   }, []);
+
   const deleteComparison = () => {
-    console.log("deleted");
+    Api.deleteComparison(id);
   };
+
   return (
     <div className="page">
       <h2>{`Comparison${id}`}</h2>

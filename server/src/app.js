@@ -17,4 +17,5 @@ app.post("/api/saveComparisons", handlers.saveComparisons);
 app.post("/api/logout", handlers.logout);
 app.get("/api/getOrderList", handlers.getOrderList);
 app.get("/api/getComparison/:id", handlers.getComparison);
+app.post("/api/deleteComparison", handlers.deleteComparison);
 module.exports = { app };
