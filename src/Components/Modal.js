@@ -1,6 +1,7 @@
 import React from "react";
 import "./assets/css/modal.css";
 const Modal = (props) => {
+  const btnClasses = props.btnClasses || {};
   return props.isVisible ? (
     <div className="modal">
       <div className="popup">
@@ -10,12 +11,18 @@ const Modal = (props) => {
             &times;
           </button>
         </div>
-        {props.children}
+        <div className="content">{props.children}</div>
         <div className="footer">
-          <button className="btn theme-btn" onClick={props.onCancel}>
+          <button
+            className={btnClasses.cancel || "btn theme-btn"}
+            onClick={props.onCancel}
+          >
             Cancel
           </button>
-          <button className="btn danger-btn" onClick={props.onConfirm}>
+          <button
+            className={btnClasses.ok || "btn danger-btn"}
+            onClick={props.onConfirm}
+          >
             OK
           </button>
         </div>

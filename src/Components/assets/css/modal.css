@@ -15,8 +15,22 @@
 	background: white;
 	min-width: 40rem;
 	max-width: 62rem;
+	min-height: 13rem;
 	padding: 1rem;
 	z-index: 101;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
+	box-sizing: border-box;
+}
+
+.popup .content {
+	display: flex;
+	flex-flow: column;
+}
+
+.content * {
+	width: 90%;
 }
 
 .popup .header {

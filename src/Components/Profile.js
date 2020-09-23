@@ -14,7 +14,7 @@ const ComparisonFolder = (props) => {
     <div className="comparison">
       <div className="icon">
         <Link to={`/comparisons/${props.id}`}>
-          <i class="fa fa-folder" aria-hidden="true"></i>
+          <i className="fa fa-folder" aria-hidden="true"></i>
         </Link>
       </div>
       <div className="name">{comparison.comparisonName}</div>

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import * as Api from "./Api";
 import Cards from "./Cards";
+import withAuthorization from "./hoc/withAuthorization";
 import Modal from "./Modal";
+
 const Comparisons = (props) => {
   const history = useHistory();
   const [comparison, setComparison] = useState({});
@@ -53,4 +55,4 @@ const Comparisons = (props) => {
   );
 };
 
-export default Comparisons;
+export default withAuthorization(Comparisons);

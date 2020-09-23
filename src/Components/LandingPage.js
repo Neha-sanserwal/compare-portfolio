@@ -85,6 +85,7 @@ export default function (props) {
     <div className="page">
       <div className="search-area">
         <input
+          placeholder="Search repository..."
           className="txt-input"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -100,6 +101,7 @@ export default function (props) {
         text={`Enter name of comparison`}
         onConfirm={saveComparisons}
         onCancel={hideModal}
+        btnClasses={{ cancel: "btn danger-btn", ok: "btn theme-btn" }}
       >
         <input
           className="txt-input"

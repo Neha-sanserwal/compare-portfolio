@@ -6,11 +6,11 @@
 
 .txt-input {
 	border: 1px solid lightgray;
-	height: 4rem;
+	height: 3.5rem;
 	font-size: 1.2rem;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	width: 49.9%;
+	width: 55%;
 	padding: 1rem;
 	box-sizing: border-box;
 }
@@ -94,7 +94,7 @@
 	font-size: 2rem;
 	top: -1rem;
 	right: -0.5rem;
-	color: #bf3f3f;
+	color: #f5494a;
 }
 
 .compare-cards {
@@ -118,6 +118,9 @@
 	border-bottom: 1px solid #e7e7e7;
 }
 
+.card-header div {
+	width: 60%;
+}
 
 .card-header img {
 	height: 50px;
