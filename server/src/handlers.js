@@ -140,16 +140,23 @@ const deleteComparison = (req, res) => {
   const { sessionId } = req.cookies;
   const { id } = req.body;
   const username = sessions.getSession(sessionId);
-  if (!username) {
-    res.json({ message: "Please login" });
-    return;
-  }
   deleteComparisonCards(dbClient, id, username).then((isDeleted) => {
     isDeleted &&
       deleteQueueId(dbClient, "comparisons", id).then((isComparisonDeleted) => {
         res.json({ isComparisonDeleted });
       });
   });
+};
+
+const isLoggedIn = (req, res, next) => {
+  const { sessions } = req.app.locals;
+  const { sessionId } = req.cookies;
+  const username = sessions.getSession(sessionId);
+  if (!username) {
+    res.json({ errMsg: "authentication failed" });
+    return;
+  }
+  next();
 };
 
 module.exports = {
@@ -161,4 +168,5 @@ module.exports = {
   getComparison,
   getOrderList,
   deleteComparison,
+  isLoggedIn,
 };
