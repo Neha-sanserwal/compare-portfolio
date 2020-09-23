@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import * as Api from "./Api";
 import "./assets/css/profile.css";
@@ -6,6 +6,7 @@ import withAuthorization from "./hoc/withAuthorization";
 
 const ComparisonFolder = (props) => {
   const [comparison, setComparison] = useState({});
+
   useEffect(() => {
     Api.getComparison(props.id).then(setComparison);
   }, []);
@@ -34,6 +35,7 @@ const Profile = (props) => {
   ));
   return (
     <div className="page">
+      <div>{props.message}</div>
       <h2>My Comparisons</h2>
 
       <div className="comparisons">{comparisonComponent}</div>

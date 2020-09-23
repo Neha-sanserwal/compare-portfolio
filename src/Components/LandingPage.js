@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import * as Api from "./Api";
 import useDebounce from "./hooks/useDebounce";
 import "./assets/css/landing.css";
@@ -44,9 +44,16 @@ export default function (props) {
   };
 
   const saveComparisons = () => {
-    Api.saveComparisons({ comparisonName, cards }).then(() => {
-      setCards([]);
-      setIsVisible(false);
+    Api.saveComparisons({ comparisonName, cards }).then(({ isSaved }) => {
+      let timeOut;
+      if (isSaved) {
+        setCards([]);
+        setIsVisible(false);
+        timeOut = setTimeout(() => {
+          props.dispatch({ type: "none" });
+        }, 1000);
+        props.dispatch({ type: "success" });
+      }
     });
   };
 
@@ -81,6 +88,7 @@ export default function (props) {
   }
   return (
     <div className="page">
+      <div>{props.message}</div>
       <div className="search-area">
         <input
           placeholder="Search repository..."

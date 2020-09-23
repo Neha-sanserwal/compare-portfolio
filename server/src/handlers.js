@@ -76,7 +76,7 @@ const saveComparisons = (req, res) => {
   incrComparisonId(dbClient).then((id) => {
     dbClient.rpush(`${username}Comparisons`, id);
     dbClient.hset(username, id, JSON.stringify(comparison), () => {
-      res.json(true);
+      res.json({ isSaved: true });
     });
   });
 };
