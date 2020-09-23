@@ -153,7 +153,7 @@ const isLoggedIn = (req, res, next) => {
   const { sessionId } = req.cookies;
   const username = sessions.getSession(sessionId);
   if (!username) {
-    res.json({ errMsg: "authentication failed" });
+    res.json({ msg: "authentication failed" });
     return;
   }
   next();

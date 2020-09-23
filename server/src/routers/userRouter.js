@@ -1,4 +1,5 @@
 const express = require("express");
+const handlers = require("../handlers");
 const userRouter = express.Router();
 
 userRouter.use(handlers.isLoggedIn);

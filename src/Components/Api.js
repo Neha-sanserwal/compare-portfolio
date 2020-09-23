@@ -44,7 +44,7 @@ export const registerUser = (username, userDetails) => {
 
 export const logout = () => {
   return new Promise((resolve, reject) => {
-    fetchPostRequest(`/api/logout`)
+    fetchPostRequest(`/api/user/logout`)
       .then((res) => res.json())
       .then(resolve)
       .catch(reject);
@@ -71,7 +71,7 @@ export const getRepos = (value) => {
 
 export const saveComparisons = (username, cards) => {
   return new Promise((resolve, reject) => {
-    fetchPostRequest("/api/saveComparisons", { username, cards })
+    fetchPostRequest("/api/user/saveComparisons", { username, cards })
       .then((res) => res.json())
       .then(resolve)
       .catch(reject);
@@ -80,7 +80,7 @@ export const saveComparisons = (username, cards) => {
 
 export const getOrderList = () => {
   return new Promise((resolve, reject) => {
-    fetchGetRequest("/api/getOrderList")
+    fetchGetRequest("/api/user/getOrderList")
       .then((res) => {
         if (res.redirected) {
           window.location.href = res.url;
@@ -94,7 +94,7 @@ export const getOrderList = () => {
 
 export const getComparison = (id) => {
   return new Promise((resolve, reject) => {
-    fetchGetRequest(`/api/getComparison/${id}`)
+    fetchGetRequest(`/api/user/getComparison/${id}`)
       .then((res) => {
         if (res.redirected) {
           window.location.href = res.url;
@@ -109,7 +109,7 @@ export const getComparison = (id) => {
 export const deleteComparison = (id) => {
   console.log(id);
   return new Promise((resolve, reject) => {
-    fetchPostRequest(`/api/deleteComparison`, { id })
+    fetchPostRequest(`/api/user/deleteComparison`, { id })
       .then((res) => res.json())
       .then(resolve);
   });
