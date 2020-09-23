@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as Api from "./Api";
 import "./assets/css/navbar.css";
+import useSessionUser from "./hooks/useSessionUser";
 
 const Navbar = function (props) {
-  const [user, setUser] = useState({});
   const history = useHistory();
-
-  useEffect(() => {
-    Api.getCurrentUser().then(setUser);
-  }, []);
 
   const handleLogout = () => {
     Api.logout().then((isLoggedOut) => {
       if (isLoggedOut) {
         history.push("/");
-        setUser({});
+        props.changeSessionUser();
       }
     });
   };
@@ -27,11 +23,11 @@ const Navbar = function (props) {
           <img alt="comparer" src={require("./assets/images/logo.png")} />
         </Link>
       </div>
-      {user.login ? (
+      {props.user.login ? (
         <div className="navlist">
           <div className="navItem">
             <Link to="/profile">
-              <h3>{user.name}</h3>
+              <h3>{props.user.name}</h3>
             </Link>
           </div>
           <div className="navItem">

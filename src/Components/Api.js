@@ -69,9 +69,9 @@ export const getRepos = (value) => {
   });
 };
 
-export const saveComparisons = (username, comparison) => {
+export const saveComparisons = (comparison) => {
   return new Promise((resolve, reject) => {
-    fetchPostRequest("/api/user/saveComparisons", { username, comparison })
+    fetchPostRequest("/api/user/saveComparisons", { comparison })
       .then((res) => res.json())
       .then(resolve)
       .catch(reject);

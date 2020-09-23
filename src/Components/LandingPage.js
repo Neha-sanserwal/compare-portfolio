@@ -7,7 +7,6 @@ import Cards from "./Cards";
 import Modal from "./Modal";
 
 export default function (props) {
-  const [user, setUser] = useState({});
   const [repoList, setRepoList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [cards, setCards] = useState([]);
@@ -16,7 +15,6 @@ export default function (props) {
   const debouncedSearch = useDebounce(searchTerm, 500);
 
   useEffect(() => {
-    Api.getCurrentUser().then(setUser);
     setCards(JSON.parse(localStorage.getItem("cards")));
   }, []);
 
@@ -46,7 +44,7 @@ export default function (props) {
   };
 
   const saveComparisons = () => {
-    Api.saveComparisons(user.login, { comparisonName, cards }).then(() => {
+    Api.saveComparisons({ comparisonName, cards }).then(() => {
       setCards([]);
       setIsVisible(false);
     });
@@ -73,7 +71,7 @@ export default function (props) {
           Reset
         </button>
 
-        {user.login && (
+        {props.user.login && (
           <button className="btn theme-btn" onClick={showModal}>
             Save comparison
           </button>

@@ -69,10 +69,12 @@ const incrComparisonId = (dbClient) => {
 };
 
 const saveComparisons = (req, res) => {
-  const { username, comparison } = req.body;
-  const { dbClient } = req.app.locals;
+  const { comparison } = req.body;
+  const { dbClient, sessions } = req.app.locals;
+  const { sessionId } = req.cookies;
+  const username = sessions.getSession(sessionId);
   incrComparisonId(dbClient).then((id) => {
-    dbClient.rpush("comparisons", id);
+    dbClient.rpush(`${username}Comparisons`, id);
     dbClient.hset(username, id, JSON.stringify(comparison), () => {
       res.json(true);
     });
@@ -101,7 +103,7 @@ const getOrderList = (req, res) => {
   const { dbClient, sessions } = req.app.locals;
   const { sessionId } = req.cookies;
   const username = sessions.getSession(sessionId);
-  getQueue(dbClient, "comparisons").then((data) => {
+  getQueue(dbClient, `${username}Comparisons`).then((data) => {
     res.json(data);
   });
 };
@@ -136,15 +138,17 @@ const deleteComparisonCards = (dbClient, id, username) => {
 };
 
 const deleteComparison = (req, res) => {
-  const { dbClient, sessions } = req.app.locals;
-  const { sessionId } = req.cookies;
   const { id } = req.body;
+  const { sessionId } = req.cookies;
+  const { dbClient, sessions } = req.app.locals;
   const username = sessions.getSession(sessionId);
   deleteComparisonCards(dbClient, id, username).then((isDeleted) => {
     isDeleted &&
-      deleteQueueId(dbClient, "comparisons", id).then((isComparisonDeleted) => {
-        res.json({ isComparisonDeleted });
-      });
+      deleteQueueId(dbClient, `${username}Comparisons`, id).then(
+        (isComparisonDeleted) => {
+          res.json({ isComparisonDeleted });
+        }
+      );
   });
 };
 
