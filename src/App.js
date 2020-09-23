@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LandingPage from "./Components/LandingPage";
 import Navbar from "./Components/Navbar";
 import Profile from "./Components/Profile";
-import WithComparisons from "./Components/WithComparisons";
+import WithComparisons from "./Components/Comparisons";
 function App() {
   return (
     <div className="App">

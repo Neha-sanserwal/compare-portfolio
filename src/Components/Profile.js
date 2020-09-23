@@ -4,6 +4,24 @@ import * as Api from "./Api";
 import "./assets/css/profile.css";
 import withAuthorization from "./hoc/withAuthorization";
 
+const ComparisonFolder = (props) => {
+  const [comparison, setComparison] = useState({});
+  useEffect(() => {
+    Api.getComparison(props.id).then(setComparison);
+  }, []);
+
+  return (
+    <div className="comparison">
+      <div className="icon">
+        <Link to={`/comparisons/${props.id}`}>
+          <i class="fa fa-folder" aria-hidden="true"></i>
+        </Link>
+      </div>
+      <div className="name">{comparison.comparisonName}</div>
+    </div>
+  );
+};
+
 const Profile = (props) => {
   const [queue, setQueue] = useState([]);
 
@@ -12,14 +30,7 @@ const Profile = (props) => {
   }, []);
 
   const comparisonComponent = queue.map((id) => (
-    <div key={id} className="comparison">
-      <div className="icon">
-        <Link to={`/comparisons/${id}`}>
-          <i class="fa fa-folder" aria-hidden="true"></i>
-        </Link>
-      </div>
-      <div className="name">{`comparison_${id}`}</div>
-    </div>
+    <ComparisonFolder key={id} id={id} />
   ));
   return (
     <div className="page">

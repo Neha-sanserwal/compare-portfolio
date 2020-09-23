@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
 import useDebounce from "./hooks/useDebounce";
 import "./assets/css/landing.css";
-import List from "./searchSuggestion";
+import List from "./SearchSuggestion";
 import Cards from "./Cards";
+import Modal from "./Modal";
 
 export default function (props) {
   const [user, setUser] = useState({});
   const [repoList, setRepoList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [cards, setCards] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [comparisonName, setComparisonName] = useState("No name");
   const debouncedSearch = useDebounce(searchTerm, 500);
 
   useEffect(() => {
@@ -43,8 +46,18 @@ export default function (props) {
   };
 
   const saveComparisons = () => {
-    Api.saveComparisons(user.login, cards);
-    setCards([]);
+    Api.saveComparisons(user.login, { comparisonName, cards }).then(() => {
+      setCards([]);
+      setIsVisible(false);
+    });
+  };
+
+  const showModal = () => {
+    setIsVisible(true);
+  };
+
+  const hideModal = () => {
+    setIsVisible(false);
   };
 
   let saveBtn;
@@ -61,7 +74,7 @@ export default function (props) {
         </button>
 
         {user.login && (
-          <button className="btn theme-btn" onClick={saveComparisons}>
+          <button className="btn theme-btn" onClick={showModal}>
             Save comparison
           </button>
         )}
@@ -72,6 +85,7 @@ export default function (props) {
     <div className="page">
       <div className="search-area">
         <input
+          className="txt-input"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -81,6 +95,18 @@ export default function (props) {
         <Cards cards={cards} deleteCard={deleteCard} />
       </div>
       {saveBtn}
+      <Modal
+        isVisible={isVisible}
+        text={`Enter name of comparison`}
+        onConfirm={saveComparisons}
+        onCancel={hideModal}
+      >
+        <input
+          className="txt-input"
+          value={comparisonName}
+          onChange={(e) => setComparisonName(e.target.value)}
+        />
+      </Modal>
     </div>
   );
 }

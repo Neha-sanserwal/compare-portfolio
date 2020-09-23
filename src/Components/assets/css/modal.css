@@ -1,0 +1,50 @@
+.modal {
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal .popup {
+	background: white;
+	min-width: 40rem;
+	max-width: 62rem;
+	padding: 1rem;
+	z-index: 101;
+}
+
+.popup .header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 0.5rem;
+}
+
+.popup .close {
+	background: none;
+	border: 0;
+	box-shadow: none;
+	font-size: 2rem;
+	line-height: 1.5rem;
+}
+
+.popup .title {
+	margin: 0;
+}
+
+.popup .footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-top: 0.5rem;
+}
+
+.popup .footer button {
+	margin-left: 0.5rem;
+}

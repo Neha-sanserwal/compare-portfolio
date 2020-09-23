@@ -44,7 +44,7 @@
 }
 
 .danger-btn {
-  border: 0.1rem solid red;
-  background: red;
+  border: 0.1rem solid #f5494a;
+  background: #f5494a;
   color: white
 }

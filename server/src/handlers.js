@@ -69,11 +69,11 @@ const incrComparisonId = (dbClient) => {
 };
 
 const saveComparisons = (req, res) => {
-  const { username, cards } = req.body;
+  const { username, comparison } = req.body;
   const { dbClient } = req.app.locals;
   incrComparisonId(dbClient).then((id) => {
     dbClient.rpush("comparisons", id);
-    dbClient.hset(username, id, JSON.stringify(cards), () => {
+    dbClient.hset(username, id, JSON.stringify(comparison), () => {
       res.json(true);
     });
   });

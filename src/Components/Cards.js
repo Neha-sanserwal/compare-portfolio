@@ -38,7 +38,7 @@ export default (props) => {
           <i className="fa fa-star" aria-hidden="true"></i>
           Stars
         </div>
-        {info.score}
+        {info.stargazers_count}
       </div>
       <div className="item">
         <div className="label">
