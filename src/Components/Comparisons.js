@@ -4,6 +4,7 @@ import * as Api from "./Api";
 import Cards from "./Cards";
 import withAuthorization from "./hoc/withAuthorization";
 import Modal from "./Modal";
+import alert from "../globals/alert";
 
 const Comparisons = (props) => {
   const history = useHistory();
@@ -18,14 +19,16 @@ const Comparisons = (props) => {
   const deleteComparison = () => {
     Api.deleteComparison(id).then(({ isComparisonDeleted }) => {
       let timeOut;
-      if (isComparisonDeleted) {
-        props.dispatch({ type: "success" });
-        setIsVisible(false);
-        timeOut = setTimeout(() => {
-          props.dispatch({ type: "none" });
-        }, 1000);
-        history.push("/profile");
+      if (!isComparisonDeleted) {
+        props.dispatch({ type: alert.DELETE_FAILURE });
+      } else {
+        props.dispatch({ type: alert.DELETE_SUCCESS });
       }
+      setIsVisible(false);
+      timeOut = setTimeout(() => {
+        props.dispatch({});
+      }, 3000);
+      history.push("/profile");
     });
   };
 
@@ -40,10 +43,8 @@ const Comparisons = (props) => {
   return (
     <div className="page">
       <h2>{comparison.comparisonName}</h2>
-      <div className="comparison">
-        <div className="compare-cards">
-          {comparison.cards && <Cards cards={comparison.cards} />}
-        </div>
+      <div className="compare-cards">
+        {comparison.cards && <Cards cards={comparison.cards} />}
       </div>
       <div className="btns">
         <Link to={"/profile"}>

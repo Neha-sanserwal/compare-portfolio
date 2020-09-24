@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import * as Api from "./Api";
 import useDebounce from "./hooks/useDebounce";
 import "./assets/css/landing.css";
 import List from "./SearchSuggestion";
 import Cards from "./Cards";
 import Modal from "./Modal";
+import alert from "../globals/alert";
 
 export default function (props) {
   const [repoList, setRepoList] = useState([]);
@@ -46,14 +47,16 @@ export default function (props) {
   const saveComparisons = () => {
     Api.saveComparisons({ comparisonName, cards }).then(({ isSaved }) => {
       let timeOut;
-      if (isSaved) {
-        setCards([]);
-        setIsVisible(false);
-        timeOut = setTimeout(() => {
-          props.dispatch({ type: "none" });
-        }, 1000);
-        props.dispatch({ type: "success" });
+      if (!isSaved) {
+        props.dispatch({ type: alert.SAVE_FAILURE });
+      } else {
+        props.dispatch({ type: alert.SAVE_SUCCESS });
       }
+      setCards([]);
+      setIsVisible(false);
+      timeOut = setTimeout(() => {
+        props.dispatch({});
+      }, 3000);
     });
   };
 
@@ -88,7 +91,6 @@ export default function (props) {
   }
   return (
     <div className="page">
-      <div>{props.message}</div>
       <div className="search-area">
         <input
           placeholder="Search repository..."

@@ -1,20 +1,28 @@
 .comparisons {
 	display: flex;
 	margin: 0 auto;
+	margin-top: 5rem;
+	justify-items: center;
 	width: 60%;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
 }
 
 .comparison {
+	width: 20%;
 	display: flex;
 	flex-flow: column;
 	flex-wrap: wrap;
+
+	margin-bottom: 1rem;
 }
 
 .comparison .icon {
-	margin-bottom: 1rem;
 	font-size: 5rem;
+}
+
+.comparisons .name {
+	width: 100%;
+
 }
 
 .comparison .icon a {

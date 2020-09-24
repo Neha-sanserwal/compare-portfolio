@@ -35,7 +35,7 @@ const Profile = (props) => {
   ));
   return (
     <div className="page">
-      <div>{props.message}</div>
+      {/* {<div className="message">{props.message}</div>} */}
       <h2>My Comparisons</h2>
 
       <div className="comparisons">{comparisonComponent}</div>

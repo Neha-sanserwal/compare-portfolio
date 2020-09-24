@@ -6,10 +6,18 @@ import Navbar from "./Components/Navbar";
 import Profile from "./Components/Profile";
 import WithComparisons from "./Components/Comparisons";
 import * as Api from "./Components/Api";
-import alert from "./Components/hooks/useAlert";
+import alert from "./Components/util/alert";
+
+const AlertMessage = (props) => {
+  const { message, type } = props.alert || {};
+  return (
+    <div className={`message ${type} ${message ? "show" : ""}`}>{message}</div>
+  );
+};
+
 function App() {
   const [user, setUser] = useState({});
-  const [message, dispatch] = useReducer(alert, "");
+  const [alertMessage, dispatch] = useReducer(alert, "");
   const changeSessionUser = () => {
     Api.getCurrentUser().then(setUser);
   };
@@ -21,12 +29,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar changeSessionUser={changeSessionUser} user={user} />
+        <AlertMessage alert={alertMessage} />
         <Switch>
           <Route exact path="/">
-            <LandingPage user={user} message={message} dispatch={dispatch} />
+            <LandingPage user={user} dispatch={dispatch} />
           </Route>
           <Route exact path="/profile">
-            <Profile message={message} />
+            <Profile />
           </Route>
           <Route exact path={"/comparisons/:id"}>
             <WithComparisons dispatch={dispatch} />

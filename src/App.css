@@ -48,3 +48,32 @@
   background: #f5494a;
   color: white
 }
+
+.message {
+  display: flex;
+  position: fixed;
+  top: 7.5rem;
+  background: rgba(137, 43, 226, 0.565);
+  height: 3rem;
+  min-width: 15rem;
+  text-align: center;
+  align-items: center;
+  padding: 1rem;
+  font-weight: 900;
+  justify-content: center;
+  color: white;
+  right: -100%;
+  transition: 0.5s right ease;
+}
+
+.message.show {
+  right: 1rem;
+}
+
+.success {
+  background-color: green
+}
+
+.failure {
+  background-color: red;
+}
