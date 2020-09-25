@@ -1,3 +1,4 @@
+const config = require("../../config");
 const { getReposOf, getGithubUser, getAccessToken } = require("./gitApi");
 
 const saveUserDetails = (dbClient, userDetails) => {
@@ -17,8 +18,10 @@ const authenticateUser = (req, res) => {
       .then((githubDetails) => JSON.parse(githubDetails))
       .then((githubDetails) => {
         saveUserDetails(dbClient, githubDetails).then(() => {
-          res.cookie("sessionId", sessions.createSession(githubDetails.login));
-          res.redirect("http://localhost:3000/");
+          res.cookie("sessionId", sessions.createSession(githubDetails.login), {
+            expires: new Date(Date.now() + 3 * 100 * 1000),
+          });
+          res.redirect(config.getAppUrl());
         });
       });
   });

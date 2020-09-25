@@ -12,10 +12,13 @@ const getToken = () => {
 const getUsername = () => {
   return process.env.USERNAME;
 };
-
+const getAppUrl = () => {
+  return process.env.APP_URL;
+};
 module.exports = {
   getClientID,
   getClientSecret,
   getUsername,
   getToken,
+  getAppUrl,
 };

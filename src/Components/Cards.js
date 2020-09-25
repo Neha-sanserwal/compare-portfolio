@@ -26,7 +26,9 @@ export default (props) => {
         </div>
       )}
       <div className="card-header">
-        <div>{info.full_name}</div>
+        <div>
+          <a href={info.html_url}>{info.full_name}</a>
+        </div>
         <img src={info.owner.avatar_url} />
       </div>
       <div
