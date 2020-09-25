@@ -6,6 +6,7 @@ import List from "./SearchSuggestion";
 import Cards from "./Cards";
 import Modal from "./Modal";
 import alert from "../globals/alert";
+import Button from "./Button";
 
 export default function (props) {
   const [repoList, setRepoList] = useState([]);
@@ -16,7 +17,8 @@ export default function (props) {
   const debouncedSearch = useDebounce(searchTerm, 500);
 
   useEffect(() => {
-    setCards(JSON.parse(localStorage.getItem("cards")));
+    const localCards = JSON.parse(localStorage.getItem("cards")) || [];
+    setCards(localCards);
   }, []);
 
   useEffect(() => {
@@ -36,10 +38,13 @@ export default function (props) {
     if (info.id) {
       setCards((prevCards) => [...prevCards, info]);
     }
+    resetAll();
+  };
+  const resetAll = () => {
     setRepoList([]);
+    setCards([]);
     setSearchTerm("");
   };
-
   const deleteCard = (id) => {
     setCards(cards.filter((card) => card.id !== id));
   };
@@ -52,8 +57,8 @@ export default function (props) {
       } else {
         props.dispatch({ type: alert.SAVE_SUCCESS });
       }
-      setCards([]);
-      setIsVisible(false);
+      resetAll();
+      hideModal();
       timeOut = setTimeout(() => {
         props.dispatch({});
       }, 3000);
@@ -68,27 +73,16 @@ export default function (props) {
     setIsVisible(false);
   };
 
-  let saveBtn;
-  if (cards.length) {
-    saveBtn = (
-      <div className="btns">
-        <button
-          className="btn danger-btn"
-          onClick={() => {
-            setCards([]);
-          }}
-        >
-          Reset
-        </button>
-
-        {props.user.login && (
-          <button className="btn theme-btn" onClick={showModal}>
-            Save comparison
-          </button>
-        )}
-      </div>
-    );
-  }
+  const { login } = props.user;
+  let footer;
+  footer = (
+    <div className="btns">
+      <Button classes="danger-btn" onClick={resetAll}>
+        Reset
+      </Button>
+      {login && <Button onClick={showModal}>Save comparison</Button>}
+    </div>
+  );
   return (
     <div className="page">
       <div className="search-area">
@@ -103,7 +97,7 @@ export default function (props) {
       <div className="compare-cards">
         <Cards cards={cards} deleteCard={deleteCard} />
       </div>
-      {saveBtn}
+      {cards.length ? footer : null}
       <Modal
         isVisible={isVisible}
         text={`Enter name of comparison`}

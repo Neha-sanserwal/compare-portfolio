@@ -1,6 +1,6 @@
-import CARD_ITEM from "../globals/cardItem";
+import CARD_ITEM from "../../globals/cardItem";
 
-const changeHover = (state, action) => {
+export default (state, action) => {
   switch (action.type) {
     case CARD_ITEM.LANGUAGE:
       return { language: "showHovered" };
