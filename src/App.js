@@ -3,10 +3,11 @@ import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LandingPage from "./Components/LandingPage";
 import Navbar from "./Components/Navbar";
-import Profile from "./Components/Profile";
-import WithComparisons from "./Components/Comparisons";
+import Comparisons from "./Components/Comparisons";
+import Comparison from "./Components/Comparison";
 import * as Api from "./Components/Api";
 import alert from "./Components/util/alert";
+import ROUTES from "./globals/routes";
 
 const AlertMessage = (props) => {
   const { message, type } = props.alert || {};
@@ -31,14 +32,14 @@ function App() {
         <Navbar changeSessionUser={changeSessionUser} user={user} />
         <AlertMessage alert={alertMessage} />
         <Switch>
-          <Route exact path="/">
+          <Route exact path={ROUTES.HOME}>
             <LandingPage user={user} dispatch={dispatch} />
           </Route>
-          <Route exact path="/profile">
-            <Profile />
+          <Route exact path={ROUTES.COMPARISONS}>
+            <Comparisons />
           </Route>
-          <Route exact path={"/comparisons/:id"}>
-            <WithComparisons dispatch={dispatch} />
+          <Route exact path={ROUTES.COMPARISON}>
+            <Comparison dispatch={dispatch} />
           </Route>
           <Route>
             <h1>Not found</h1>

@@ -122,6 +122,11 @@
 	width: 60%;
 }
 
+.item.showHovered {
+	background: #8c2ce619;
+	color: #8c2ce6
+}
+
 .card-header img {
 	height: 50px;
 }
@@ -140,9 +145,7 @@
 	border-bottom: 0.5px solid #E7E7E54a;
 }
 
-.card .item:hover {
-	background-color: #f9f9f9;
-}
+
 
 .card .item .label {
 	display: flex;

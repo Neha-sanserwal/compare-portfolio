@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+  color: none;
+}
+
 .page {
   display: flex;
   flex-flow: column;
@@ -53,17 +58,19 @@
   display: flex;
   position: fixed;
   top: 7.5rem;
-  background: rgba(137, 43, 226, 0.565);
-  height: 3rem;
+  height: 2rem;
   min-width: 15rem;
   text-align: center;
   align-items: center;
   padding: 1rem;
   font-weight: 900;
   justify-content: center;
-  color: white;
+  color: rgb(13, 12, 12);
   right: -100%;
   transition: 0.5s right ease;
+  border-radius: 10px;
+
+
 }
 
 .message.show {
@@ -71,9 +78,9 @@
 }
 
 .success {
-  background-color: green
+  border: 2px solid rgb(27, 176, 27)
 }
 
 .failure {
-  background-color: red;
+  border: 2px solid rgb(229, 59, 59);
 }
