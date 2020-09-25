@@ -59,6 +59,14 @@
 	color: #8c2ce6
 }
 
+.card-header div a {
+	color: black
+}
+
+.card-header div a:hover {
+	color: #8c2ce6;
+}
+
 .card-header img {
 	height: 50px;
 }
