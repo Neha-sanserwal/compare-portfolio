@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import Moment from "react-moment";
 import changeHover from "./util/changeHover";
 import CARD_ITEM from "../globals/cardItem";
-
+import "./assets/css/cards.css";
 const DeleteBtn = (props) => {
   const { handleClick } = props;
   return (
@@ -64,7 +64,7 @@ export default (props) => {
       </div>
       <div
         className={`item ${classes.openIssue}`}
-        onMouseEnter={() => dispatch({ type: "openIssue" })}
+        onMouseEnter={() => dispatch({ type: CARD_ITEM.OPEN_ISSUES })}
         onMouseLeave={() => dispatch({})}
       >
         <div className="label">

@@ -6,6 +6,7 @@ import withAuthorization from "./hoc/withAuthorization";
 import Modal from "./Modal";
 import alert from "../globals/alert";
 import ROUTES from "../globals/routes";
+import Button from "./Button";
 const Comparison = (props) => {
   const history = useHistory();
   const [comparison, setComparison] = useState({});
@@ -48,11 +49,11 @@ const Comparison = (props) => {
       </div>
       <div className="btns">
         <Link to={ROUTES.COMPARISONS}>
-          <button className="btn theme-btn">Go to Comparisons</button>
+          <Button classes="btn theme-btn">Go to Comparisons</Button>
         </Link>
-        <button className="btn danger-btn" onClick={showModal}>
+        <Button classes="danger-btn" onClick={showModal}>
           Delete
-        </button>
+        </Button>
       </div>
       <Modal
         isVisible={isVisible}

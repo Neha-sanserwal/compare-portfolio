@@ -13,6 +13,8 @@ a {
   width: 80%;
   margin: 0 auto;
   margin-top: 5rem;
+  margin-bottom: 5rem;
+
 
 }
 
@@ -22,6 +24,7 @@ a {
   flex-wrap: wrap;
   width: 30%;
   margin: 0 auto;
+  margin-top: 3rem;
 }
 
 

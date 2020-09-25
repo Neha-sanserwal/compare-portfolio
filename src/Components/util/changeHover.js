@@ -10,7 +10,7 @@ export default (state, action) => {
       return { forks: "showHovered" };
     case CARD_ITEM.CREATED_AT:
       return { createdAt: "showHovered" };
-    case CARD_ITEM.OPEN_ISSUE:
+    case CARD_ITEM.OPEN_ISSUES:
       return { openIssue: "showHovered" };
     case CARD_ITEM.LAST_UPDATED:
       return { lastUpdated: "showHovered" };

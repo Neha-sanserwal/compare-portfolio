@@ -35,10 +35,12 @@ export default function (props) {
 
   const pushToCards = (id) => {
     const [info] = repoList.filter((repo) => repo.id === id);
-    if (info.id) {
+    const duplicate = cards.filter((card) => card.id === info.id);
+    if (info.id && !duplicate.length) {
       setCards((prevCards) => [...prevCards, info]);
     }
-    resetAll();
+    setSearchTerm("");
+    setRepoList([]);
   };
   const resetAll = () => {
     setRepoList([]);
@@ -97,7 +99,6 @@ export default function (props) {
       <div className="compare-cards">
         <Cards cards={cards} deleteCard={deleteCard} />
       </div>
-      {cards.length ? footer : null}
       <Modal
         isVisible={isVisible}
         text={`Enter name of comparison`}
@@ -111,6 +112,7 @@ export default function (props) {
           onChange={(e) => setComparisonName(e.target.value)}
         />
       </Modal>
+      {cards.length ? footer : null}
     </div>
   );
 }
