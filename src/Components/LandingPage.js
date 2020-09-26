@@ -14,7 +14,7 @@ export default function (props) {
   const [cards, setCards] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [comparisonName, setComparisonName] = useState("No name");
-  const debouncedSearch = useDebounce(searchTerm, 500);
+  const debouncedSearch = useDebounce(searchTerm, 300);
 
   useEffect(() => {
     const localCards = JSON.parse(localStorage.getItem("cards")) || [];

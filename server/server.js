@@ -1,6 +1,15 @@
+const redis = require("redis");
 const { app } = require("./src/app");
 require("dotenv").config({ path: __dirname + "/../.env" });
-const dbClient = require("redis").createClient({ db: 1 });
+
+let dbClient;
+if (process.env.REDISCLOUD_URL) {
+  dbClient = redis.createClient(process.env.REDISCLOUD_URL, {
+    no_ready_check: true,
+  });
+} else {
+  dbClient = redis.createClient({ db: 1 });
+}
 const sessions = require("./src/session");
 
 const { env } = process;
