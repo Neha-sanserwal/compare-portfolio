@@ -19,7 +19,7 @@ const authenticateUser = (req, res) => {
       .then((githubDetails) => {
         saveUserDetails(dbClient, githubDetails).then(() => {
           res.cookie("sessionId", sessions.createSession(githubDetails.login), {
-            expires: new Date(Date.now() + 3 * 100 * 1000),
+            expires: new Date(Date.now() + 60 * 24 * 100 * 1000),
           });
           res.redirect(config.getAppUrl());
         });
