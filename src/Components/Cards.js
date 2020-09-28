@@ -27,7 +27,7 @@ export default (props) => {
       )}
       <div className="card-header">
         <div>
-          <a href={info.html_url} target="_blank">
+          <a href={info.html_url} target="_blank" rel="noopener noreferrer">
             {info.full_name}
           </a>
         </div>

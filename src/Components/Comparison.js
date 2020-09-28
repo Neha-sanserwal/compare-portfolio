@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import * as Api from "./Api";
 import Cards from "./Cards";
@@ -19,14 +19,13 @@ const Comparison = (props) => {
 
   const deleteComparison = () => {
     Api.deleteComparison(id).then(({ isComparisonDeleted }) => {
-      let timeOut;
       if (!isComparisonDeleted) {
         props.dispatch({ type: alert.DELETE_FAILURE });
       } else {
         props.dispatch({ type: alert.DELETE_SUCCESS });
       }
       setIsVisible(false);
-      timeOut = setTimeout(() => {
+      setTimeout(() => {
         props.dispatch({});
       }, 3000);
       history.push(ROUTES.COMPARISONS);

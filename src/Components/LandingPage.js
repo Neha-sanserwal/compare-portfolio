@@ -53,7 +53,6 @@ export default function (props) {
 
   const saveComparisons = () => {
     Api.saveComparisons({ comparisonName, cards }).then(({ isSaved }) => {
-      let timeOut;
       if (!isSaved) {
         props.dispatch({ type: alert.SAVE_FAILURE });
       } else {
@@ -61,7 +60,7 @@ export default function (props) {
       }
       resetAll();
       hideModal();
-      timeOut = setTimeout(() => {
+      setTimeout(() => {
         props.dispatch({});
       }, 3000);
     });

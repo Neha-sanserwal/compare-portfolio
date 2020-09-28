@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Api from "./Api";
 import "./assets/css/profile.css";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as Api from "./Api";
 import "./assets/css/navbar.css";
@@ -15,7 +15,7 @@ const Navbar = function (props) {
       }
     });
   };
-  const { login, avatar_url } = props.user;
+  const { login } = props.user;
   return (
     <div className="navbar">
       <div className="header">
