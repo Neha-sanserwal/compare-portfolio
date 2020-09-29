@@ -9,7 +9,9 @@ app.use(express.json());
 
 app.use(cookieParser());
 const buildPath = path.join(__dirname, "../../", "build");
+
 app.use(express.static(buildPath));
+
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "build", "index.html"))
 );
