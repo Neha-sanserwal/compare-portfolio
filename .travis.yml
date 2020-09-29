@@ -1,3 +1,12 @@
 language: node_js
-node_js:
-  - 12.16.1
+node_js: lts/*
+jobs:
+  include:
+  - stage: DEPLOY
+    deploy:
+      app: repo-comparer
+      provider: heroku
+      api_key:
+        secure:ngl+TrfPcMxTPk2QXoK6a3MBh0jmn/p/Xp+82BKdQbJpslL6dL9PaMiwEWq35F4+iiQv7/lXFtmKn3hBYXE7dVVuno70E8/OREPtcS2qngybVrlm2wC906a+/Mwaur5caKkToc9LlsrR5CRu5sdm6StCR2qhEc66q9JTmaasvK8ATY0gZaPXUs6Haj7l1DdobI63iZrirKpu3UgHTarqWhjqt2H7QVunYCpIqyXlTRtCdUGNq5MfuZPj5QDTfNoTcpgn/mmGI+aTZzdtPZWUlz1u5PYgy1TNTb2JyUEFje5q/wxz3MujdAlY66+CQgSoGR91E/VHWubAa6i5gTre4bGamVVaAKkzrkbxt/GDKmgdUowORYvlKjBWACZBvnZza8nNPRQ+yKyeURjxF6M1BpUHmi2nLMq4d2bAVhXFLWqvcbxToXPiDSORupLOQJtO4/NylAFfgIKDrhfd3huviRVvOEzPoKKVqw5Ow1DW6enPcRy4Uu/WznuNGnzurYrpQ4X3Whb4it75hajM1Ss03nH0DBH0aTr6Phc1VC07keiZV51l3Ev4FOXxfGGbd2Fr9Q8PdQ4KqdZdWBRP4MkdP1aZX/3xGpMr56McOyAeAY9Y6F2SY6GipXNLNTlXOEZp1crLGMf1aIuxCzyveGGCt/ij1/1YcfiYJYusE+JVSbc=
+
+      skip_cleanup: true
