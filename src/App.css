@@ -42,8 +42,6 @@ a {
   right: -100%;
   transition: 0.5s right ease;
   border-radius: 10px;
-
-
 }
 
 .message.show {

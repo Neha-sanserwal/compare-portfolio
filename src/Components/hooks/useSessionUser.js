@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as Api from "../Api";
+import * as Api from "../../Apis/Api";
 export default (isLoggedIn) => {
   const [user, setUser] = useState({});
   useEffect(() => {

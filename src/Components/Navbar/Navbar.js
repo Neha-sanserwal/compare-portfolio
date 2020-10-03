@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as Api from "../../Apis/Api";
 import "./navbar.css";
 import ROUTES from "../../globals/routes";
+import Button from "../Button";
 import * as Logo from "../assets/images/logo.png";
 const Navbar = function (props) {
   const history = useHistory();
@@ -27,17 +28,19 @@ const Navbar = function (props) {
         <div className="navlist">
           <div className="navItem">{props.user.name}</div>
           <div className="navItem">
-            <Link to={ROUTES.COMPARISONS}>Your comparisons</Link>
+            <Link to={ROUTES.COMPARISONS}>
+              <Button classes="btn nav-btn">Your comparisons</Button>
+            </Link>
           </div>
-          <button className="navItem btn danger-btn" onClick={handleLogout}>
+          <Button classes="navItem btn danger-btn" onClick={handleLogout}>
             Logout
-          </button>
+          </Button>
         </div>
       ) : (
         <div className="navlist">
           <div className="navItem">
             <a href={ROUTES.LOGIN}>
-              <button className="btn nav-btn">Login with github</button>
+              <Button classes="btn nav-btn">Login with github</Button>
             </a>
           </div>
         </div>
