@@ -95,9 +95,7 @@ export default function (props) {
         />
         <List list={repoList} handleClick={pushToCards} />
       </div>
-      <div className="compare-cards">
-        <Cards cards={cards} deleteCard={deleteCard} />
-      </div>
+      <Cards cards={cards} deleteCard={deleteCard} />
       <Modal
         isVisible={isVisible}
         text={`Enter name of comparison`}

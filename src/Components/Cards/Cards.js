@@ -15,7 +15,7 @@ const DeleteBtn = (props) => {
 
 export default (props) => {
   const [classes, dispatch] = useReducer(changeHover, {});
-  return props.cards.map((info) => (
+  const cards = props.cards.map((info) => (
     <div className="card" key={info.id}>
       {props.deleteCard && (
         <div>
@@ -106,4 +106,5 @@ export default (props) => {
       </div>
     </div>
   ));
+  return <div className="compare-cards">{cards}</div>;
 };
