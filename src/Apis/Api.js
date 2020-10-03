@@ -81,13 +81,7 @@ export const saveComparisons = (comparison) => {
 export const getOrderList = () => {
   return new Promise((resolve, reject) => {
     fetchGetRequest("/api/user/getOrderList")
-      .then((res) => {
-        if (res.redirected) {
-          window.location.href = res.url;
-          return { message: "Please Login" };
-        }
-        return res.json();
-      })
+      .then((res) => res.json())
       .then(resolve);
   });
 };
@@ -95,13 +89,7 @@ export const getOrderList = () => {
 export const getComparison = (id) => {
   return new Promise((resolve, reject) => {
     fetchGetRequest(`/api/user/getComparison/${id}`)
-      .then((res) => {
-        if (res.redirected) {
-          window.location.href = res.url;
-          return { message: "Please Login" };
-        }
-        return res.json();
-      })
+      .then((res) => res.json())
       .then(resolve);
   });
 };

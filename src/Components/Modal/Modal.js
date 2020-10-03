@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button";
 import "./modal.css";
 const Modal = (props) => {
   const btnClasses = props.btnClasses || {};
@@ -13,18 +14,15 @@ const Modal = (props) => {
         </div>
         <div className="content">{props.children}</div>
         <div className="footer">
-          <button
-            className={btnClasses.cancel || "btn theme-btn"}
-            onClick={props.onCancel}
-          >
+          <Button classes={btnClasses.cancel} onClick={props.onCancel}>
             Cancel
-          </button>
-          <button
-            className={btnClasses.ok || "btn danger-btn"}
+          </Button>
+          <Button
+            classes={btnClasses.ok || "btn danger-btn"}
             onClick={props.onConfirm}
           >
             OK
-          </button>
+          </Button>
         </div>
       </div>
     </div>

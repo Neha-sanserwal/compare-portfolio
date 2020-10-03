@@ -32,7 +32,7 @@ export default (props) => {
             {info.full_name}
           </a>
         </div>
-        <img src={info.owner.avatar_url} />
+        <img src={info.owner.avatar_url} alt={info.owner.name} />
       </div>
       <div
         className={`item ${classes.language}`}
