@@ -1,0 +1,90 @@
+.card {
+	display: flex;
+	position: relative;
+	margin: 2rem 0 2rem 0rem;
+	border: 0.5px solid #e7e7e5;
+	border-radius: 5px;
+	flex-flow: column;
+	width: 350px;
+	margin-left: 0.6rem;
+	margin-right: 0.6rem;
+	box-shadow: 1px 2px 9px 3px #e7e7e7;
+}
+
+.card .delete-Icon {
+	position: absolute;
+	font-size: 2rem;
+	top: -1rem;
+	right: -0.5rem;
+	color: #c0c0c091;
+}
+
+.card .delete-Icon:hover {
+	position: absolute;
+	font-size: 2rem;
+	top: -1rem;
+	right: -0.5rem;
+	color: #f5494a;
+}
+
+.card-header {
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	height: 5rem;
+	align-items: center;
+	padding: 1rem;
+	font-weight: 600;
+	box-sizing: border-box;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.card-header div {
+	width: 60%;
+	display: flex;
+	text-align: left
+}
+
+.item.showHovered {
+	background: #8c2ce60d;
+	color: #8c2ce6
+}
+
+.card-header div a {
+	color: black
+}
+
+.card-header div a:hover {
+	color: #8c2ce6;
+}
+
+.card-header img {
+	height: 50px;
+}
+
+.card .item {
+	display: flex;
+	height: 3rem;
+	align-items: center;
+	font-size: 0.9rem;
+	padding: 0 1rem;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	margin: 0 auto;
+	justify-content: space-between;
+	width: 100%;
+	border-bottom: 0.5px solid #E7E7E54a;
+}
+
+
+
+.card .item .label {
+	display: flex;
+	flex-wrap: wrap;
+	width: 50%;
+}
+
+.label * {
+	margin-right: 0.8rem;
+}

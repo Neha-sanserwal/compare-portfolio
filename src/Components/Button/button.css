@@ -1,0 +1,28 @@
+.btn {
+	border-radius: 5px;
+	min-width: 8rem;
+	height: 3rem;
+	font-size: 1rem;
+	font-weight: 700;
+	background: none;
+	cursor: pointer;
+	padding: 0 0.5rem;
+}
+
+.theme-btn {
+	border: 0.1rem solid blueviolet;
+	background: none;
+	color: blueviolet;
+}
+
+.theme-btn:hover {
+	border: 0.1rem solid blueviolet;
+	background: blueviolet;
+	color: white
+}
+
+.danger-btn {
+	border: 0.1rem solid #f5494a;
+	background: #f5494a;
+	color: white
+}
