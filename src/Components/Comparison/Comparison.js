@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import * as Api from "../Api";
+import * as Api from "../../Apis/Api";
 import Cards from "../Cards";
 import withAuthorization from "../hoc/withAuthorization";
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 import alert from "../../globals/alert";
 import ROUTES from "../../globals/routes";
 import Button from "../Button";

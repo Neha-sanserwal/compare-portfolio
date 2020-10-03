@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./searchSuggestion.css";
 export default (props) => {
   if (!props.list.length) {
     return <div></div>;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./assets/css/modal.css";
+import "./modal.css";
 const Modal = (props) => {
   const btnClasses = props.btnClasses || {};
   return props.isVisible ? (

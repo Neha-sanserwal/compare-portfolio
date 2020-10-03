@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import * as Api from "./Api";
-import "./assets/css/navbar.css";
-import ROUTES from "../globals/routes";
-
+import * as Api from "../../Apis/Api";
+import "./navbar.css";
+import ROUTES from "../../globals/routes";
+import * as Logo from "../assets/images/logo.png";
 const Navbar = function (props) {
   const history = useHistory();
 
@@ -20,7 +20,7 @@ const Navbar = function (props) {
     <div className="navbar">
       <div className="header">
         <Link to={ROUTES.HOME}>
-          <img alt="comparer" src={require("./assets/images/logo.png")} />
+          <img alt="comparer" src={Logo} />
         </Link>
       </div>
       {login ? (

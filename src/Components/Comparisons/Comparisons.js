@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import * as Api from "../Api";
+import * as Api from "../../Apis/Api";
 import "./comparisons.css";
 import withAuthorization from "../hoc/withAuthorization";
 

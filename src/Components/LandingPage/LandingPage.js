@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import * as Api from "./Api";
-import useDebounce from "./hooks/useDebounce";
-import "./assets/css/landing.css";
-import List from "./SearchSuggestion";
-import Cards from "./Cards";
-import Modal from "./Modal";
-import alert from "../globals/alert";
-import Button from "./Button";
+import * as Api from "../../Apis/Api";
+import useDebounce from "../hooks/useDebounce";
+import List from "../SearchSuggestion/SearchSuggestion";
+import Cards from "../Cards";
+import Modal from "../Modal/Modal";
+import alert from "../../globals/alert";
+import Button from "../Button";
 
 export default function (props) {
   const [repoList, setRepoList] = useState([]);

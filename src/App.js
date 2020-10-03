@@ -1,11 +1,11 @@
 import React, { useEffect, useReducer, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import LandingPage from "./Components/LandingPage";
-import Navbar from "./Components/Navbar";
+import LandingPage from "./Components/LandingPage/LandingPage";
+import Navbar from "./Components/Navbar/Navbar";
 import Comparisons from "./Components/Comparisons";
 import Comparison from "./Components/Comparison";
-import * as Api from "./Components/Api";
+import * as Api from "./Apis/Api";
 import alert from "./Components/util/alert";
 import ROUTES from "./globals/routes";
 
