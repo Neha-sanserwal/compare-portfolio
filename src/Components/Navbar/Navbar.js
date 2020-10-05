@@ -29,18 +29,22 @@ const Navbar = function (props) {
           <div className="navItem">{props.user.name}</div>
           <div className="navItem">
             <Link to={ROUTES.COMPARISONS}>
-              <Button classes="btn nav-btn">Your comparisons</Button>
+              <Button>Your comparisons</Button>
             </Link>
           </div>
-          <Button classes="navItem btn danger-btn" onClick={handleLogout}>
-            Logout
-          </Button>
+          <div className="navItem">
+            <Button type="danger" onClick={handleLogout}>
+              Logout
+            </Button>
+          </div>
         </div>
       ) : (
         <div className="navlist">
           <div className="navItem">
             <a href={ROUTES.LOGIN}>
-              <Button classes="btn nav-btn">Login with github</Button>
+              <Button type="nav" classes="btn nav-btn">
+                Login with github
+              </Button>
             </a>
           </div>
         </div>
