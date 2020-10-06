@@ -77,10 +77,14 @@ export default function (props) {
   let footer;
   footer = (
     <div className="btns">
-      <Button classes="danger-btn" onClick={resetAll}>
+      <Button classes="btn danger-btn" onClick={resetAll}>
         Reset
       </Button>
-      {login && <Button onClick={showModal}>Save comparison</Button>}
+      {login && (
+        <Button classes="btn theme-btn" onClick={showModal}>
+          Save comparison
+        </Button>
+      )}
     </div>
   );
   return (

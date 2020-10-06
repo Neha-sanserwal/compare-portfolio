@@ -29,11 +29,11 @@ const Navbar = function (props) {
           <div className="navItem">{props.user.name}</div>
           <div className="navItem">
             <Link to={ROUTES.COMPARISONS}>
-              <Button>Your comparisons</Button>
+              <Button classes="btn nav-btn">Your comparisons</Button>
             </Link>
           </div>
           <div className="navItem">
-            <Button type="danger" onClick={handleLogout}>
+            <Button classes="btn danger-btn" onClick={handleLogout}>
               Logout
             </Button>
           </div>

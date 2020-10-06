@@ -25,11 +25,10 @@ const Btn = styled.button`
 `;
 
 const Button = (props) => {
-  console.log("button", ButtonType[props.type]);
   return (
-    <Btn type={props.type} onClick={props.onClick || null}>
+    <button className={props.classes} onClick={props.onClick || null}>
       {props.children}
-    </Btn>
+    </button>
   );
 };
 

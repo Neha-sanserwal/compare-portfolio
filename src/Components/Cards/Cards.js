@@ -3,13 +3,25 @@ import Moment from "react-moment";
 import changeHover from "../util/changeHover";
 import CARD_ITEM from "../../globals/cardItem";
 import "./cards.css";
+import styled from "styled-components";
+
+const DltIcon = styled.div`
+  position: absolute;
+  font-size: 2rem;
+  top: -1rem;
+  right: -0.5rem;
+  color: #c0c0c091;
+  &:hover {
+    color: #f5494a;
+  }
+`;
 
 const DeleteBtn = (props) => {
   const { handleClick } = props;
   return (
-    <div className="delete-Icon" onClick={handleClick}>
+    <DltIcon onClick={handleClick}>
       <i className="fa fa-times-circle" aria-hidden="true"></i>
-    </div>
+    </DltIcon>
   );
 };
 
