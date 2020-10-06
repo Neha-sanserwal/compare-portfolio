@@ -7,7 +7,6 @@ import Modal from "../Modal/Modal";
 import alert from "../../globals/alert";
 import ROUTES from "../../globals/routes";
 import Button from "../Button";
-
 const Comparison = (props) => {
   const history = useHistory();
   const [comparison, setComparison] = useState({});
@@ -16,7 +15,7 @@ const Comparison = (props) => {
 
   useEffect(() => {
     Api.getComparison(id).then(setComparison);
-  }, [id]);
+  }, []);
 
   const deleteComparison = () => {
     Api.deleteComparison(id).then(({ isComparisonDeleted }) => {
