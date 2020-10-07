@@ -7,6 +7,16 @@ import Modal from "../Modal/Modal";
 import alert from "../../globals/alert";
 import ROUTES from "../../globals/routes";
 import Button from "../Button";
+import styled from "styled-components";
+
+const CompareCard = styled.div`
+  margin-top: 3rem;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
 const Comparison = (props) => {
   const history = useHistory();
   const [comparison, setComparison] = useState({});
@@ -15,7 +25,7 @@ const Comparison = (props) => {
 
   useEffect(() => {
     Api.getComparison(id).then(setComparison);
-  }, []);
+  }, [id]);
 
   const deleteComparison = () => {
     Api.deleteComparison(id).then(({ isComparisonDeleted }) => {
@@ -43,14 +53,14 @@ const Comparison = (props) => {
   return (
     <div className="page">
       <h2>{comparison.comparisonName}</h2>
-      <div className="compare-cards">
+      <CompareCard>
         {comparison.cards && <Cards cards={comparison.cards} />}
-      </div>
+      </CompareCard>
       <div className="btns">
         <Link to={ROUTES.COMPARISONS}>
           <Button classes="btn theme-btn">Go to Comparisons</Button>
         </Link>
-        <Button classes="danger-btn" onClick={showModal}>
+        <Button classes="btn danger-btn" onClick={showModal}>
           Delete
         </Button>
       </div>

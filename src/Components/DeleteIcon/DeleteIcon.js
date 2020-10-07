@@ -16,7 +16,7 @@ export default (props) => {
   const { handleClick } = props;
   return (
     <DltIcon onClick={handleClick}>
-      <i className="fa fa-times-circle" aria-hidden="true"></i>
+      <i className="fa fa-times" aria-hidden="true"></i>
     </DltIcon>
   );
 };

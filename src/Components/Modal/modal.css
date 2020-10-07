@@ -48,9 +48,9 @@
 	line-height: 1.5rem;
 }
 
-.popup .title {
+/* .popup .title {
 	margin: 0;
-}
+} */
 
 .popup .footer {
 	display: flex;
@@ -59,6 +59,4 @@
 	padding-top: 0.5rem;
 }
 
-.popup .footer button {
-	margin-left: 0.5rem;
-}
+.popup .footer button {}
